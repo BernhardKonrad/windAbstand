@@ -1,0 +1,157 @@
+		return(markers)
+	}
+
+	var circles = defineCircles();
+	var circlesL = circles;
+    var circlesR = defineCircles();
+
+	var markers = defineMarkers();
+	var markersL = markers;
+	var markersR = defineMarkers();
+
+      function initialize() {
+        var mapOptions = {
+          zoom: 10,
+          center: new google.maps.LatLng(50,10),
+          mapTypeId: google.maps.MapTypeId.HYBRID
+        };
+        var mapL = new google.maps.Map(document.getElementById('leftMap'),
+            mapOptions);
+        var mapR = new google.maps.Map(document.getElementById('rightMap'),
+            mapOptions);
+
+            for (i=0; i<circles.length; i++){
+            	circlesL[i].setMap(mapL);
+            	circlesR[i].setMap(mapR);
+            	}
+            for (i=0; i<markers.length; i++){
+            	markersL[i].setMap(mapL);
+            	markersR[i].setMap(mapR);
+            	}
+}
+
+function setRadiusL(radius) {
+		for ( var i=0; i<circles.length; i++ ){
+    		circlesL[i].setRadius(radius);
+    		}
+}
+function setRadiusR(radius) {
+		for ( var i=0; i<circles.length; i++ ){
+    		circlesR[i].setRadius(radius);
+    		}
+}
+
+function makeCirclesVisibleL(seeMe){
+		for ( var i=0; i<circles.length; i++ ){
+    		circlesL[i].setVisible(seeMe);
+    		}
+}
+function makeCirclesVisibleR(seeMe){
+		console.log('We are right')
+		for ( var i=0; i<circles.length; i++ ){
+    		circlesR[i].setVisible(seeMe);
+    		}
+}
+
+function makeCirclesTransparentL(val){
+		for ( var i=0; i<circles.length; i++ ){
+    		circlesL[i].fillOpacity=val
+    		var vis = circlesL[i].getVisible();
+	    	circlesL[i].setVisible(!vis);
+    		circlesL[i].setVisible(vis);
+		}
+}
+function makeCirclesTransparentR(val){
+		for ( var i=0; i<circles.length; i++ ){
+    		circlesR[i].fillOpacity=val
+    		var vis = circlesR[i].getVisible();
+	    	circlesR[i].setVisible(!vis);
+    		circlesR[i].setVisible(vis);
+		}
+}
+
+function makeMarkersVisibleL(seeMe){
+		for ( var i=0; i<markers.length; i++ ){
+    		markersL[i].setVisible(seeMe);
+    		}
+}
+function makeMarkersVisibleR(seeMe){
+		for ( var i=0; i<markers.length; i++ ){
+    		markersR[i].setVisible(seeMe);
+    		}
+}
+
+      google.maps.event.addDomListener(window, 'load', initialize);
+    </script>
+
+</head>
+<body>
+
+<script type="text/javascript">
+function showRangeValueL(newValue)
+{
+		document.getElementById("rangeL").innerHTML=newValue;
+		setRadiusL(Number(newValue));
+}
+function showRangeValueR(newValue)
+{
+		document.getElementById("rangeR").innerHTML=newValue;
+		setRadiusR(Number(newValue));
+}
+function showAlphaValueL(newValue)
+{
+	document.getElementById("alphaL").innerHTML=newValue;
+	makeCirclesTransparentL(Number(newValue));
+}
+function showAlphaValueR(newValue)
+{
+	document.getElementById("alphaR").innerHTML=newValue;
+	makeCirclesTransparentR(Number(newValue));
+}
+</script>
+  <table border="0">
+	<tr>
+	<td>
+<input name="radiusL" type="radio" value="off" onchange="makeCirclesVisibleL(false)"> keine Kreise
+<input name="radiusL" type="radio" value="true"  onchange="setRadiusL(1000);makeCirclesVisibleL(true)"> 1000m
+<input name="radiusL" type="radio" value="2000m" onchange="setRadiusL(2000);makeCirclesVisibleL(true)"> 2000m
+<input type="range" name="points" min="500" max="5000" step="100" value="1000" onchange="showRangeValueL(this.value)">
+<span id="rangeL">1000</span>
+<br>
+Transparenz:
+<input name="transparenzL" type="radio" value="false" onchange="makeCirclesTransparentL(0)"> 0
+<input name="transparenzL" type="radio" value="false"  onchange="makeCirclesTransparentL(0.3)"> 0.3
+<input name="transparenzL" type="radio" value="true" onchange="makeCirclesTransparentL(1)"> 1
+<input type="range" name="points" min="0" max="1" step="0.05" value="1" onchange="showAlphaValueL(this.value)">
+<span id="alphaL">1</span>
+<br>
+Markierungen:
+<input name="markersL" type="radio" value="off" onchange="makeMarkersVisibleL(false)">  aus
+<input name="markersL" type="radio" value="on" onchange="makeMarkersVisibleL(true)"> an
+</td>
+<td>
+<input name="radiusR" type="radio" value="off" onchange="makeCirclesVisibleR(false)"> keine Kreise
+<input name="radiusR" type="radio" value="true"  onchange="setRadiusR(1000);makeCirclesVisibleR(true)"> 1000m
+<input name="radiusR" type="radio" value="2000m" onchange="setRadiusR(2000);makeCirclesVisibleR(true)"> 2000m
+<input type="range" name="points" min="500" max="5000" step="100" value="1000" onchange="showRangeValueR(this.value)">
+<span id="rangeR">1000</span>
+<br>
+Transparenz:
+<input name="transparenzR" type="radio" value="false" onchange="makeCirclesTransparentR(0)"> 0
+<input name="transparenzR" type="radio" value="false"  onchange="makeCirclesTransparentR(0.3)"> 0.3
+<input name="transparenzR" type="radio" value="true" onchange="makeCirclesTransparentR(1)"> 1
+<input type="range" name="points" min="0" max="1" step="0.05" value="1" onchange="showAlphaValueR(this.value)">
+<span id="alphaR">1</span>
+<br>
+Markierungen:
+<input name="markersR" type="radio" value="off" onchange="makeMarkersVisibleR(false)">  aus
+<input name="markersR" type="radio" value="on" onchange="makeMarkersVisibleR(true)"> an
+</td>
+</tr>
+<tr>
+	<td> <div id="leftMap" style="height:700px;width:600px"></div> </td>
+	<td> <div id="rightMap" style="height:700px;width:600px" ></div> </td>
+	</tr>
+  </table>
+ </body>
+</html>

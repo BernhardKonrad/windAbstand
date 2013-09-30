@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Abstand Windräder</title>
+    <meta name="viewport" content="initial-scale=0.5, user-scalable=no">
+    <meta charset="utf-8">
+    <link href="https://developers.google.com/maps/documentation/javascript/examples/default.css" rel="stylesheet">
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+
+    <script>
+    function defineCircles(){
+    	var circles = [];
