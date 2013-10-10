@@ -1,0 +1,703 @@
+
+// Functions to use database locations
+
+function getLandkreisPoints(Landkreis){
+	points = [];
+	for (var i=0; i<Landkreis.length; i++){
+		var point = new google.maps.LatLng(Landkreis[i][1],Landkreis[i][2])
+		points.push(point)
+	}
+	return(points)
+}
+
+function getPolygon(Landkreis){
+	var poly = new google.maps.Polygon({
+		paths: getLandkreisPoints(Landkreis),
+		map: null,
+		strokeColor:"#FF0000",
+		strokeOpacity: 0.8,
+		strokeWeight: 2,
+		fillColor: "#FF0000",
+		fillOpacity: 0,
+		clickable: false
+	})
+	return(poly)
+}
+
+function defineMarkerEin(map,OrtschaftenEin,i){
+	var marker = new google.maps.Marker({
+		position: new google.maps.LatLng(OrtschaftenEin[i][1],OrtschaftenEin[i][2]),
+		map: map,
+		icon: MarkerPin(OrtschaftenEin[i][3])
+	});
+	var infowindow = new google.maps.InfoWindow({
+		content: OrtschaftenEin[i][0]
+	});
+	google.maps.event.addListener(marker, "click", function () {infowindow.open(map,marker);});
+	return(marker)
+}
+
+function getMarkers(Ortschaften){
+	var markers = []
+	for (var i=0; i < Ortschaften.length; i++){
+		var marker = new google.maps.Marker({
+			position: new google.maps.LatLng(Ortschaften[i][1],Ortschaften[i][2]),
+			map: null,
+			icon: MarkerPin(Ortschaften[i][3])
+		});
+		markers.push(marker);
+		}
+	return(markers)
+}
+
+function getMarkersEin(map,OrtschaftenEin){
+	var markers = [];
+	for (var i=0; i < OrtschaftenEin.length; i++){
+		marker = defineMarkerEin(map,OrtschaftenEin,i);
+		markers.push(marker)
+	}
+	return(markers)
+}
+
+function getCircles(Ortschaften,rad){
+	var circles = []
+	for (var i=0; i < Ortschaften.length; i++){
+		var circle = new google.maps.Circle({
+			center: new google.maps.LatLng(Ortschaften[i][1],Ortschaften[i][2]),
+			map: null,
+			radius: rad,
+			fillColor: Ortschaften[i][3],
+			strokeWeight: 1,
+			fillOpacity: 0.3
+		});
+		circles.push(circle);
+	}
+	return(circles)
+}
+
+// Translate database into variables
+
+// Landkreise
+var LKAschaffenburgL = getPolygon(LKAschaffenburg)
+var LKAschaffenburgR = getPolygon(LKAschaffenburg)
+var LKBadKissingenL = getPolygon(LKBadKissingen)
+var LKBadKissingenR = getPolygon(LKBadKissingen)
+var LKHassbergeL = getPolygon(LKHassberge)
+var LKHassbergeR = getPolygon(LKHassberge)
+var LKKitzingenL = getPolygon(LKKitzingen)
+var LKKitzingenR = getPolygon(LKKitzingen)
+var LKMainSpessartL = getPolygon(LKMainSpessart)
+var LKMainSpessartR = getPolygon(LKMainSpessart)
+var LKMiltenbergL = getPolygon(LKMiltenberg)
+var LKMiltenbergR = getPolygon(LKMiltenberg)
+var LKRhoenGrabfeldL = getPolygon(LKRhoenGrabfeld)
+var LKRhoenGrabfeldR = getPolygon(LKRhoenGrabfeld)
+var LKSchweinfurtL = getPolygon(LKSchweinfurt)
+var LKSchweinfurtR = getPolygon(LKSchweinfurt)
+var LKWuerzburgL = getPolygon(LKWuerzburg)
+var LKWuerzburgR = getPolygon(LKWuerzburg)
+
+
+// Ein-pro-Ortschaft Marker
+var markersAschaffenburgEinL = getMarkers(OrtschaftenAschaffenburgEin)
+var markersAschaffenburgEinR = getMarkers(OrtschaftenAschaffenburgEin)
+var markersBadKissingenEinL = getMarkers(OrtschaftenBadKissingenEin)
+var markersBadKissingenEinR = getMarkers(OrtschaftenBadKissingenEin)
+var markersHassbergeEinL = getMarkers(OrtschaftenHassbergeEin)
+var markersHassbergeEinR = getMarkers(OrtschaftenHassbergeEin)
+var markersKitzingenEinL = getMarkers(OrtschaftenKitzingenEin)
+var markersKitzingenEinR = getMarkers(OrtschaftenKitzingenEin)
+var markersMainSpessartEinL = getMarkers(OrtschaftenMainSpessartEin)
+var markersMainSpessartEinR = getMarkers(OrtschaftenMainSpessartEin)
+var markersMiltenbergEinL = getMarkers(OrtschaftenMiltenbergEin)
+var markersMiltenbergEinR = getMarkers(OrtschaftenMiltenbergEin)
+var markersRhoenGrabfeldEinL = getMarkers(OrtschaftenRhoenGrabfeldEin)
+var markersRhoenGrabfeldEinR = getMarkers(OrtschaftenRhoenGrabfeldEin)
+var markersSchweinfurtEinL = getMarkers(OrtschaftenSchweinfurtEin)
+var markersSchweinfurtEinR = getMarkers(OrtschaftenSchweinfurtEin)
+var markersWuerzburgEinL = getMarkers(OrtschaftenWuerzburgEin)
+var markersWuerzburgEinR = getMarkers(OrtschaftenWuerzburgEin)
+
+
+// Alle Marker
+var markersAschaffenburgL = getMarkers(OrtschaftenAschaffenburg)
+var markersAschaffenburgR = getMarkers(OrtschaftenAschaffenburg)
+var markersBadKissingenL = getMarkers(OrtschaftenBadKissingen)
+var markersBadKissingenR = getMarkers(OrtschaftenBadKissingen)
+var markersHassbergeL = getMarkers(OrtschaftenHassberge)
+var markersHassbergeR = getMarkers(OrtschaftenHassberge)
+var markersKitzingenL = getMarkers(OrtschaftenKitzingen)
+var markersKitzingenR = getMarkers(OrtschaftenKitzingen)
+var markersMainSpessartL = getMarkers(OrtschaftenMainSpessart)
+var markersMainSpessartR = getMarkers(OrtschaftenMainSpessart)
+var markersMiltenbergL = getMarkers(OrtschaftenMiltenberg)
+var markersMiltenbergR = getMarkers(OrtschaftenMiltenberg)
+var markersRhoenGrabfeldL = getMarkers(OrtschaftenRhoenGrabfeld)
+var markersRhoenGrabfeldR = getMarkers(OrtschaftenRhoenGrabfeld)
+var markersSchweinfurtL = getMarkers(OrtschaftenSchweinfurt)
+var markersSchweinfurtR = getMarkers(OrtschaftenSchweinfurt)
+var markersWuerzburgL = getMarkers(OrtschaftenWuerzburg)
+var markersWuerzburgR = getMarkers(OrtschaftenWuerzburg)
+
+
+// Kreise
+var circlesAschaffenburgL = getCircles(OrtschaftenAschaffenburg,1000)
+var circlesAschaffenburgR = getCircles(OrtschaftenAschaffenburg,2000)
+var circlesBadKissingenL = getCircles(OrtschaftenBadKissingen,1000)
+var circlesBadKissingenR = getCircles(OrtschaftenBadKissingen,2000)
+var circlesHassbergeL = getCircles(OrtschaftenHassberge,1000)
+var circlesHassbergeR = getCircles(OrtschaftenHassberge,2000)
+var circlesKitzingenL = getCircles(OrtschaftenKitzingen,1000)
+var circlesKitzingenR = getCircles(OrtschaftenKitzingen,2000)
+var circlesMainSpessartL = getCircles(OrtschaftenMainSpessart,1000)
+var circlesMainSpessartR = getCircles(OrtschaftenMainSpessart,2000)
+var circlesMiltenbergL = getCircles(OrtschaftenMiltenberg,1000)
+var circlesMiltenbergR = getCircles(OrtschaftenMiltenberg,2000)
+var circlesRhoenGrabfeldL = getCircles(OrtschaftenRhoenGrabfeld,1000)
+var circlesRhoenGrabfeldR = getCircles(OrtschaftenRhoenGrabfeld,2000)
+var circlesSchweinfurtL = getCircles(OrtschaftenSchweinfurt,1000)
+var circlesSchweinfurtR = getCircles(OrtschaftenSchweinfurt,2000)
+var circlesWuerzburgL = getCircles(OrtschaftenWuerzburg,1000)
+var circlesWuerzburgR = getCircles(OrtschaftenWuerzburg,2000)
+
+
+
+
+// Initialize
+
+	var mapOptions = {
+		zoom: 9,
+		center: new google.maps.LatLng(50,10),
+		mapTypeId: google.maps.MapTypeId.HYBRID
+	};
+
+function initialize() {
+	var mapL = new google.maps.Map(document.getElementById('leftMap'),mapOptions);
+	var mapR = new google.maps.Map(document.getElementById('rightMap'),mapOptions);
+
+	LKAschaffenburgL.setMap(mapL);
+	LKAschaffenburgR.setMap(mapR);
+	LKBadKissingenL.setMap(mapL);
+	LKBadKissingenR.setMap(mapR);
+	LKHassbergeL.setMap(mapL);
+	LKHassbergeR.setMap(mapR);
+	LKKitzingenL.setMap(mapL);
+	LKKitzingenR.setMap(mapR);
+	LKMainSpessartL.setMap(mapL);
+	LKMainSpessartR.setMap(mapR);
+	LKMiltenbergL.setMap(mapL);
+	LKMiltenbergR.setMap(mapR);
+	LKRhoenGrabfeldL.setMap(mapL);
+	LKRhoenGrabfeldR.setMap(mapR);
+	LKSchweinfurtL.setMap(mapL);
+	LKSchweinfurtR.setMap(mapR);
+	LKWuerzburgL.setMap(mapL);
+	LKWuerzburgR.setMap(mapR);
+}
+
+// END Initialize
+
+function centerRightMap(){
+	leftMap = LKAschaffenburgL.getMap();
+	rightMap = LKAschaffenburgR.getMap();
+	rightMap.setCenter(leftMap.getCenter());
+	rightMap.setZoom(leftMap.getZoom());
+}
+
+
+function getWhichMap(whichMap){
+	if (whichMap == "left"){
+		thisMap = LKAschaffenburgL.getMap();
+	}
+	else if (whichMap == "right") {
+		thisMap = LKAschaffenburgR.getMap();
+	}
+	else {
+		thisMap = null;
+	}
+	return(thisMap)
+}
+
+function setRadius(whichMap,radius) {
+	if (whichMap == "left") {
+		for (var i=0; i<circlesAschaffenburgL.length; i++){
+			circlesAschaffenburgL[i].setRadius(radius);
+		}
+		for (var i=0; i<circlesBadKissingenL.length; i++){
+			circlesBadKissingenL[i].setRadius(radius);
+		}
+		for (var i=0; i<circlesHassbergeL.length; i++){
+			circlesHassbergeL[i].setRadius(radius);
+		}
+		for (var i=0; i<circlesKitzingenL.length; i++){
+			circlesKitzingenL[i].setRadius(radius);
+		}
+		for (var i=0; i<circlesMainSpessartL.length; i++){
+			circlesMainSpessartL[i].setRadius(radius);
+		}
+		for (var i=0; i<circlesMiltenbergL.length; i++){
+			circlesMiltenbergL[i].setRadius(radius);
+		}
+		for (var i=0; i<circlesRhoenGrabfeldL.length; i++){
+			circlesRhoenGrabfeldL[i].setRadius(radius);
+		}
+		for (var i=0; i<circlesSchweinfurtL.length; i++){
+			circlesSchweinfurtL[i].setRadius(radius);
+		}
+		for (var i=0; i<circlesWuerzburgL.length; i++){
+			circlesWuerzburgL[i].setRadius(radius);
+		}
+	}
+	else {
+		for (var i=0; i<circlesAschaffenburgR.length; i++){
+			circlesAschaffenburgR[i].setRadius(radius);
+		}
+		for (var i=0; i<circlesBadKissingenR.length; i++){
+			circlesBadKissingenR[i].setRadius(radius);
+		}
+		for (var i=0; i<circlesHassbergeR.length; i++){
+			circlesHassbergeR[i].setRadius(radius);
+		}
+		for (var i=0; i<circlesKitzingenR.length; i++){
+			circlesKitzingenR[i].setRadius(radius);
+		}
+		for (var i=0; i<circlesMainSpessartR.length; i++){
+			circlesMainSpessartR[i].setRadius(radius);
+		}
+		for (var i=0; i<circlesMiltenbergR.length; i++){
+			circlesMiltenbergR[i].setRadius(radius);
+		}
+		for (var i=0; i<circlesRhoenGrabfeldR.length; i++){
+			circlesRhoenGrabfeldR[i].setRadius(radius);
+		}
+		for (var i=0; i<circlesSchweinfurtR.length; i++){
+			circlesSchweinfurtR[i].setRadius(radius);
+		}
+		for (var i=0; i<circlesWuerzburgR.length; i++){
+			circlesWuerzburgR[i].setRadius(radius);
+		}
+	}
+}
+
+function setMap(Ortschaften,whichMap){
+	thisMap = getWhichMap(whichMap);
+	for (var i=0; i<Ortschaften.length; i++){
+		Ortschaften[i].setMap(thisMap);
+	}
+}
+
+
+function makeCirclesTransparent(whichMap,alpha) {
+	var strokeWeight = 1*!(alpha==0 || alpha==1);
+	if (whichMap == "left") {
+		for (var i=0; i<circlesAschaffenburgL.length; i++){
+			circlesAschaffenburgL[i].setOptions({'fillOpacity': alpha, 'strokeWeight': strokeWeight});
+		}
+		for (var i=0; i<circlesBadKissingenL.length; i++){
+			circlesBadKissingenL[i].setOptions({'fillOpacity': alpha, 'strokeWeight': strokeWeight});
+		}
+		for (var i=0; i<circlesHassbergeL.length; i++){
+			circlesHassbergeL[i].setOptions({'fillOpacity': alpha, 'strokeWeight': strokeWeight});
+		}
+		for (var i=0; i<circlesKitzingenL.length; i++){
+			circlesKitzingenL[i].setOptions({'fillOpacity': alpha, 'strokeWeight': strokeWeight});
+		}
+		for (var i=0; i<circlesMainSpessartL.length; i++){
+			circlesMainSpessartL[i].setOptions({'fillOpacity': alpha, 'strokeWeight': strokeWeight});
+		}
+		for (var i=0; i<circlesMiltenbergL.length; i++){
+			circlesMiltenbergL[i].setOptions({'fillOpacity': alpha, 'strokeWeight': strokeWeight});
+		}
+		for (var i=0; i<circlesRhoenGrabfeldL.length; i++){
+			circlesRhoenGrabfeldL[i].setOptions({'fillOpacity': alpha, 'strokeWeight': strokeWeight});
+		}
+		for (var i=0; i<circlesSchweinfurtL.length; i++){
+			circlesSchweinfurtL[i].setOptions({'fillOpacity': alpha, 'strokeWeight': strokeWeight});
+		}
+		for (var i=0; i<circlesWuerzburgL.length; i++){
+			circlesWuerzburgL[i].setOptions({'fillOpacity': alpha, 'strokeWeight': strokeWeight});
+		}
+	}
+	else {
+		for (var i=0; i<circlesAschaffenburgR.length; i++){
+			circlesAschaffenburgR[i].setOptions({'fillOpacity': alpha, 'strokeWeight': strokeWeight});
+		}
+		for (var i=0; i<circlesBadKissingenR.length; i++){
+			circlesBadKissingenR[i].setOptions({'fillOpacity': alpha, 'strokeWeight': strokeWeight});
+		}
+		for (var i=0; i<circlesHassbergeR.length; i++){
+			circlesHassbergeR[i].setOptions({'fillOpacity': alpha, 'strokeWeight': strokeWeight});
+		}
+		for (var i=0; i<circlesKitzingenR.length; i++){
+			circlesKitzingenR[i].setOptions({'fillOpacity': alpha, 'strokeWeight': strokeWeight});
+		}
+		for (var i=0; i<circlesMainSpessartR.length; i++){
+			circlesMainSpessartR[i].setOptions({'fillOpacity': alpha, 'strokeWeight': strokeWeight});
+		}
+		for (var i=0; i<circlesMiltenbergR.length; i++){
+			circlesMiltenbergR[i].setOptions({'fillOpacity': alpha, 'strokeWeight': strokeWeight});
+		}
+		for (var i=0; i<circlesRhoenGrabfeldR.length; i++){
+			circlesRhoenGrabfeldR[i].setOptions({'fillOpacity': alpha, 'strokeWeight': strokeWeight});
+		}
+		for (var i=0; i<circlesSchweinfurtR.length; i++){
+			circlesSchweinfurtR[i].setOptions({'fillOpacity': alpha, 'strokeWeight': strokeWeight});
+		}
+		for (var i=0; i<circlesWuerzburgR.length; i++){
+			circlesWuerzburgR[i].setOptions({'fillOpacity': alpha, 'strokeWeight': strokeWeight});
+		}
+	}
+}
+
+
+function changeCircles(whichLandkreisString,makeVisible){
+	leftMap = LKAschaffenburgL.getMap();
+	rightMap = LKAschaffenburgR.getMap();
+	switch (whichLandkreisString){
+		case "Aschaffenburg":
+			circlesLandkreisL = circlesAschaffenburgL;
+			circlesLandkreisR = circlesAschaffenburgR;
+			markersLandkreisL = markersAschaffenburgL;
+			markersLandkreisR = markersAschaffenburgR;
+			break;
+		case "BadKissingen":
+			circlesLandkreisL = circlesBadKissingenL;
+			circlesLandkreisR = circlesBadKissingenR;
+			markersLandkreisL = markersBadKissingenL;
+			markersLandkreisR = markersBadKissingenR;
+			break;
+		case "Hassberge":
+			circlesLandkreisL = circlesHassbergeL;
+			circlesLandkreisR = circlesHassbergeR;
+			markersLandkreisL = markersHassbergeL;
+			markersLandkreisR = markersHassbergeR;
+			break;
+		case "Kitzingen":
+			circlesLandkreisL = circlesKitzingenL;
+			circlesLandkreisR = circlesKitzingenR;
+			markersLandkreisL = markersKitzingenL;
+			markersLandkreisR = markersKitzingenR;
+			break;
+		case "MainSpessart":
+			circlesLandkreisL = circlesMainSpessartL;
+			circlesLandkreisR = circlesMainSpessartR;
+			markersLandkreisL = markersMainSpessartL;
+			markersLandkreisR = markersMainSpessartR;
+			break;
+		case "Miltenberg":
+			circlesLandkreisL = circlesMiltenbergL;
+			circlesLandkreisR = circlesMiltenbergR;
+			markersLandkreisL = markersMiltenbergL;
+			markersLandkreisR = markersMiltenbergR;
+			break;
+		case "RhoenGrabfeld":
+			circlesLandkreisL = circlesRhoenGrabfeldL;
+			circlesLandkreisR = circlesRhoenGrabfeldR;
+			markersLandkreisL = markersRhoenGrabfeldL;
+			markersLandkreisR = markersRhoenGrabfeldR;
+			break;
+		case "Schweinfurt":
+			circlesLandkreisL = circlesSchweinfurtL;
+			circlesLandkreisR = circlesSchweinfurtR;
+			markersLandkreisL = markersSchweinfurtL;
+			markersLandkreisR = markersSchweinfurtR;
+			break;
+		case "Wuerzburg":
+			circlesLandkreisL = circlesWuerzburgL;
+			circlesLandkreisR = circlesWuerzburgR;
+			markersLandkreisL = markersWuerzburgL;
+			markersLandkreisR = markersWuerzburgR;
+			break;
+	}
+	if (makeVisible) {
+		for (var i=0; i<circlesLandkreisL.length; i++){
+			circlesLandkreisL[i].setMap(leftMap);
+			circlesLandkreisR[i].setMap(rightMap);
+			markersLandkreisL[i].setMap(leftMap);
+			markersLandkreisR[i].setMap(rightMap);
+		}
+	}
+	else {
+		for (var i=0; i<circlesLandkreisL.length; i++){
+			circlesLandkreisL[i].setMap(null);
+			circlesLandkreisR[i].setMap(null);
+			markersLandkreisL[i].setMap(null);
+			markersLandkreisR[i].setMap(null);
+		}
+	}
+
+makeMarkersVisible("left",whichMarker("left"))
+makeMarkersVisible("right",whichMarker("right"))
+}
+
+function whichMarker(whichMap){
+	switch (whichMap){
+		case "left":
+			markerList = document.getElementsByName("markersL");
+			break;
+		case "right":
+			markerList = document.getElementsByName("markersR");
+			break;
+	}
+	if (markerList[0].checked){
+		return("keiner");
+	}
+	else if (markerList[1].checked){
+		return("einer");
+	}
+	else {
+		return("alle");
+	}
+}
+
+function makeMarkersVisible(whichMap,whichMarkers) {
+	switch (whichMarkers){
+		case "keiner":
+			var alleMap = null;
+			var einerMap = null;
+			break;
+		case "einer":
+			var alleMap = null;
+			var einerMap = getWhichMap(whichMap);
+			break;
+		case "alle":
+			var alleMap = getWhichMap(whichMap);
+			var einerMap = null;
+			break;
+	}
+
+	if (whichMap == "left") {
+		if (isActive('checkAschaffenburg')){
+			for (var i=0; i<markersAschaffenburgL.length; i++){
+				markersAschaffenburgL[i].setMap(alleMap);
+			}
+			for (var i=0; i<markersAschaffenburgEinL.length; i++){
+				markersAschaffenburgEinL[i].setMap(einerMap);
+			}
+		}
+		if (isActive('checkBadKissingen')){
+			for (var i=0; i<markersBadKissingenL.length; i++){
+				markersBadKissingenL[i].setMap(alleMap);
+			}
+			for (var i=0; i<markersBadKissingenEinL.length; i++){
+				markersBadKissingenEinL[i].setMap(einerMap);
+			}
+		}
+		if (isActive('checkHassberge')){
+			for (var i=0; i<markersHassbergeL.length; i++){
+				markersHassbergeL[i].setMap(alleMap);
+			}
+			for (var i=0; i<markersHassbergeEinL.length; i++){
+				markersHassbergeEinL[i].setMap(einerMap);
+			}
+		}
+		if (isActive('checkKitzingen')){
+			for (var i=0; i<markersKitzingenL.length; i++){
+				markersKitzingenL[i].setMap(alleMap);
+			}
+			for (var i=0; i<markersKitzingenEinL.length; i++){
+				markersKitzingenEinL[i].setMap(einerMap);
+			}
+		}
+		if (isActive('checkMainSpessart')){
+			for (var i=0; i<markersMainSpessartL.length; i++){
+				markersMainSpessartL[i].setMap(alleMap);
+			}
+			for (var i=0; i<markersMainSpessartEinL.length; i++){
+				markersMainSpessartEinL[i].setMap(einerMap);
+			}
+		}
+		if (isActive('checkMiltenberg')){
+			for (var i=0; i<markersMiltenbergL.length; i++){
+				markersMiltenbergL[i].setMap(alleMap);
+			}
+			for (var i=0; i<markersMiltenbergEinL.length; i++){
+				markersMiltenbergEinL[i].setMap(einerMap);
+			}
+		}
+		if (isActive('checkRhoenGrabfeld')){
+			for (var i=0; i<markersRhoenGrabfeldL.length; i++){
+				markersRhoenGrabfeldL[i].setMap(alleMap);
+			}
+			for (var i=0; i<markersRhoenGrabfeldEinL.length; i++){
+				markersRhoenGrabfeldEinL[i].setMap(einerMap);
+			}
+		}
+		if (isActive('checkSchweinfurt')){
+			for (var i=0; i<markersSchweinfurtL.length; i++){
+				markersSchweinfurtL[i].setMap(alleMap);
+			}
+			for (var i=0; i<markersSchweinfurtEinL.length; i++){
+				markersSchweinfurtEinL[i].setMap(einerMap);
+			}
+		}
+		if (isActive('checkWuerzburg')){
+			for (var i=0; i<markersWuerzburgL.length; i++){
+				markersWuerzburgL[i].setMap(alleMap);
+			}
+			for (var i=0; i<markersWuerzburgEinL.length; i++){
+				markersWuerzburgEinL[i].setMap(einerMap);
+			}
+		}
+	}
+	else if (whichMap == "right") {
+		if (isActive('checkAschaffenburg')){
+			for (var i=0; i<markersAschaffenburgR.length; i++){
+				markersAschaffenburgR[i].setMap(alleMap);
+			}
+			for (var i=0; i<markersAschaffenburgEinR.length; i++){
+				markersAschaffenburgEinR[i].setMap(einerMap);
+			}
+		}
+		if (isActive('checkBadKissingen')){
+			for (var i=0; i<markersBadKissingenR.length; i++){
+				markersBadKissingenR[i].setMap(alleMap);
+			}
+			for (var i=0; i<markersBadKissingenEinR.length; i++){
+				markersBadKissingenEinR[i].setMap(einerMap);
+			}
+		}
+		if (isActive('checkHassberge')){
+			for (var i=0; i<markersHassbergeR.length; i++){
+				markersHassbergeR[i].setMap(alleMap);
+			}
+			for (var i=0; i<markersHassbergeEinR.length; i++){
+				markersHassbergeEinR[i].setMap(einerMap);
+			}
+		}
+		if (isActive('checkKitzingen')){
+			for (var i=0; i<markersKitzingenR.length; i++){
+				markersKitzingenR[i].setMap(alleMap);
+			}
+			for (var i=0; i<markersKitzingenEinR.length; i++){
+				markersKitzingenEinR[i].setMap(einerMap);
+			}
+		}
+		if (isActive('checkMainSpessart')){
+			for (var i=0; i<markersMainSpessartR.length; i++){
+				markersMainSpessartR[i].setMap(alleMap);
+			}
+			for (var i=0; i<markersMainSpessartEinR.length; i++){
+				markersMainSpessartEinR[i].setMap(einerMap);
+			}
+		}
+		if (isActive('checkMiltenberg')){
+			for (var i=0; i<markersMiltenbergR.length; i++){
+				markersMiltenbergR[i].setMap(alleMap);
+			}
+			for (var i=0; i<markersMiltenbergEinR.length; i++){
+				markersMiltenbergEinR[i].setMap(einerMap);
+			}
+		}
+		if (isActive('checkRhoenGrabfeld')){
+			for (var i=0; i<markersRhoenGrabfeldR.length; i++){
+				markersRhoenGrabfeldR[i].setMap(alleMap);
+			}
+			for (var i=0; i<markersRhoenGrabfeldEinR.length; i++){
+				markersRhoenGrabfeldEinR[i].setMap(einerMap);
+			}
+		}
+		if (isActive('checkSchweinfurt')){
+			for (var i=0; i<markersSchweinfurtR.length; i++){
+				markersSchweinfurtR[i].setMap(alleMap);
+			}
+			for (var i=0; i<markersSchweinfurtEinR.length; i++){
+				markersSchweinfurtEinR[i].setMap(einerMap);
+			}
+		}
+		if (isActive('checkWuerzburg')){
+			for (var i=0; i<markersWuerzburgR.length; i++){
+				markersWuerzburgR[i].setMap(alleMap);
+			}
+			for (var i=0; i<markersWuerzburgEinR.length; i++){
+				markersWuerzburgEinR[i].setMap(einerMap);
+			}
+		}
+	}
+}
+
+function isActive(whichLandkreis){
+	return(document.getElementById(whichLandkreis).checked);
+}
+
+google.maps.event.addDomListener(window, 'load', initialize);
+</script>
+
+</head>
+<body>
+
+<script type="text/javascript">
+function showRadiusValueL(newValue)
+{
+		document.getElementById("radiusL").innerHTML=newValue + "m";
+}
+
+function showRadiusValueR(newValue)
+{
+		document.getElementById("radiusR").innerHTML=newValue + "m";
+}
+</script>
+
+<center><button type="button" onclick="centerRightMap()"> Rechte Karte anpassen </button></center>
+
+<form action="">
+<input type="checkbox" id="checkAschaffenburg" onclick="changeCircles('Aschaffenburg',this.checked)"> Aschaffenburg
+<input type="checkbox" id="checkBadKissingen" onclick="changeCircles('BadKissingen',this.checked)"> Bad Kissingen
+<input type="checkbox" id="checkHassberge" onclick="changeCircles('Hassberge',this.checked)"> Haßberge
+<input type="checkbox" id="checkKitzingen" onclick="changeCircles('Kitzingen',this.checked)"> Kitzingen
+<input type="checkbox" id="checkMainSpessart" onclick="changeCircles('MainSpessart',this.checked)"> Main Spessart
+<input type="checkbox" id="checkMiltenberg" onclick="changeCircles('Miltenberg',this.checked)"> Miltenberg
+<input type="checkbox" id="checkRhoenGrabfeld" onclick="changeCircles('RhoenGrabfeld',this.checked)"> Rhön-Grabfeld
+<input type="checkbox" id="checkSchweinfurt" onclick="changeCircles('Schweinfurt',this.checked)"> Schweinfurt
+<input type="checkbox" id="checkWuerzburg" onclick="changeCircles('Wuerzburg',this.checked)"> Würzburg
+</form>
+  <table border="0">
+	<tr>
+	<td>
+<form>
+<button type="button" onclick="setRadius('left',Number(document.getElementById('leftRadius').value))"> Zeichne neuen Radius </button>
+<input type="range" name="leftRadius" id="leftRadius" min="500" max="5000" step="100" value="1000" onchange="showRadiusValueL(this.value)">
+<span id="radiusL">1000m</span>
+</form>
+
+Transparenz:
+<input name="transparenzL" type="radio" onchange="makeCirclesTransparent('left',0)"> 0
+<input name="transparenzL" type="radio" onchange="makeCirclesTransparent('left',0.05)"> 0.05
+<input name="transparenzL" type="radio" checked onchange="makeCirclesTransparent('left',0.3)"> 0.3
+<input name="transparenzL" type="radio" onchange="makeCirclesTransparent('left',1)"> 1
+
+<form>
+Markierungen:
+<input name="markersL" type="radio" checked onchange="makeMarkersVisible('left','keine')"> Keine
+<input name="markersL" type="radio" onchange="makeMarkersVisible('left','einer')"> Einer pro Ortschaft
+<input name="markersL" type="radio" onchange="makeMarkersVisible('left','alle')"> Alle
+</form>
+</td>
+
+
+<td>
+<form>
+<button type="button" onclick="setRadius('right',Number(document.getElementById('rightRadius').value))"> Zeichne neuen Radius </button>
+<input type="range" name="rightRadius" id="rightRadius" min="500" max="5000" step="100" value="2000" onchange="showRadiusValueR(this.value)">
+<span id="radiusR">2000m</span>
+</form>
+Transparenz:
+<input name="transparenzR" type="radio" onchange="makeCirclesTransparent('right',0)"> 0
+<input name="transparenzR" type="radio" onchange="makeCirclesTransparent('right',0.05)"> 0.05
+<input name="transparenzR" type="radio" checked onchange="makeCirclesTransparent('right',0.3)"> 0.3
+<input name="transparenzR" type="radio" onchange="makeCirclesTransparent('right',1)"> 1
+<form>
+Markierungen:
+<input name="markersR" type="radio" checked onchange="makeMarkersVisible('right','keine')"> Keine
+<input name="markersR" type="radio" onchange="makeMarkersVisible('right','einer')"> Einer pro Ortschaft
+<input name="markersR" type="radio" onchange="makeMarkersVisible('right','alle')"> Alle
+</form>
+</td>
+</tr>
+<tr>
+	<td> <div id="leftMap" style="height:700px;width:600px"></div> </td>
+	<td> <div id="rightMap" style="height:700px;width:600px" ></div> </td>
+	</tr>
+  </table>
+ </body>
+</html>

@@ -12,7 +12,7 @@ if not len(sys.argv) > 1:
 	print 'No Input Files'
 	quit()
 
-colors = ['#ff7f24','#76b7e1','#c8adcc']
+colors = ['#ff7f24','#76b7e1','#c8adcc','#FF00FF']
 for counter,inname in enumerate(sys.argv[1:]):
 	fin = open(inname,'r')
 
