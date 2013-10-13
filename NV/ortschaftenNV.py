@@ -1,4 +1,6 @@
+#!/usr/bin/python
 import sys
+import re
 
 color = sys.argv[2]
 readFile = sys.argv[1]
@@ -17,6 +19,8 @@ for line in fin:
 		fout.write('["' + ortsname + '",' + lat + ',' + lng + ',"' + color + '"],\n')
 	except ValueError:
 		ortsname=line.replace('\n','').replace('\r','')
-fout.write('];\n')
+fout.write('["' + ortsname + '",' + lat + ',' + lng + ',"' + color + '"]];\n')
 fin.close()
 fout.close()
+
+

@@ -1,4 +1,6 @@
+#!/usr/bin/python
 import sys
+import re
 
 color = sys.argv[2]
 readFile = sys.argv[1]
@@ -13,7 +15,7 @@ fout.write('var Ortschaften' + infile.replace('.txt','Ein') + ' = [\n')
 VeryFirstLine=True
 IAmLast=False
 
-for line in fin:	
+for line in fin:
 	try:
 		lat,lng = line.split(',')
 		lng = lng.replace('\n','').replace('\r','')
@@ -22,6 +24,6 @@ for line in fin:
 			fout.write('["' + ortsname + '",' + lat + ',' + lng + ',"' + color + '"],\n')
 		ortsname=line.replace('\n','').replace('\r','')
 	VeryFirstLine=False
-fout.write('];\n')
+fout.write('["' + ortsname + '",' + lat + ',' + lng + ',"' + color + '"]];\n')
 fin.close()
 fout.close()

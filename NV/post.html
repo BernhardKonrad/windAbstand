@@ -24,19 +24,6 @@ function getPolygon(Landkreis){
 	return(poly)
 }
 
-function defineMarkerEin(map,OrtschaftenEin,i){
-	var marker = new google.maps.Marker({
-		position: new google.maps.LatLng(OrtschaftenEin[i][1],OrtschaftenEin[i][2]),
-		map: map,
-		icon: MarkerPin(OrtschaftenEin[i][3])
-	});
-	var infowindow = new google.maps.InfoWindow({
-		content: OrtschaftenEin[i][0]
-	});
-	google.maps.event.addListener(marker, "click", function () {infowindow.open(map,marker);});
-	return(marker)
-}
-
 function getMarkers(Ortschaften){
 	var markers = []
 	for (var i=0; i < Ortschaften.length; i++){
@@ -48,15 +35,6 @@ function getMarkers(Ortschaften){
 		});
 		markers.push(marker);
 		}
-	return(markers)
-}
-
-function getMarkersEin(map,OrtschaftenEin){
-	var markers = [];
-	for (var i=0; i < OrtschaftenEin.length; i++){
-		marker = defineMarkerEin(map,OrtschaftenEin,i);
-		markers.push(marker)
-	}
 	return(markers)
 }
 
@@ -358,54 +336,72 @@ function changeCircles(whichLandkreisString,makeVisible){
 		case "Aschaffenburg":
 			circlesLandkreisL = circlesAschaffenburgL;
 			circlesLandkreisR = circlesAschaffenburgR;
+			markersLandkreisEinL = markersAschaffenburgEinL;
+			markersLandkreisEinR = markersAschaffenburgEinR;
 			markersLandkreisL = markersAschaffenburgL;
 			markersLandkreisR = markersAschaffenburgR;
 			break;
 		case "BadKissingen":
 			circlesLandkreisL = circlesBadKissingenL;
 			circlesLandkreisR = circlesBadKissingenR;
+			markersLandkreisEinL = markersBadKissingenEinL;
+			markersLandkreisEinR = markersBadKissingenEinR;
 			markersLandkreisL = markersBadKissingenL;
 			markersLandkreisR = markersBadKissingenR;
 			break;
 		case "Hassberge":
 			circlesLandkreisL = circlesHassbergeL;
 			circlesLandkreisR = circlesHassbergeR;
+			markersLandkreisEinL = markersHassbergeEinL;
+			markersLandkreisEinR = markersHassbergeEinR;
 			markersLandkreisL = markersHassbergeL;
 			markersLandkreisR = markersHassbergeR;
 			break;
 		case "Kitzingen":
 			circlesLandkreisL = circlesKitzingenL;
 			circlesLandkreisR = circlesKitzingenR;
+			markersLandkreisEinL = markersKitzingenEinL;
+			markersLandkreisEinR = markersKitzingenEinR;
 			markersLandkreisL = markersKitzingenL;
 			markersLandkreisR = markersKitzingenR;
 			break;
 		case "MainSpessart":
 			circlesLandkreisL = circlesMainSpessartL;
 			circlesLandkreisR = circlesMainSpessartR;
+			markersLandkreisEinL = markersMainSpessartEinL;
+			markersLandkreisEinR = markersMainSpessartEinR;
 			markersLandkreisL = markersMainSpessartL;
 			markersLandkreisR = markersMainSpessartR;
 			break;
 		case "Miltenberg":
 			circlesLandkreisL = circlesMiltenbergL;
 			circlesLandkreisR = circlesMiltenbergR;
+			markersLandkreisEinL = markersMiltenbergEinL;
+			markersLandkreisEinR = markersMiltenbergEinR;
 			markersLandkreisL = markersMiltenbergL;
 			markersLandkreisR = markersMiltenbergR;
 			break;
 		case "RhoenGrabfeld":
 			circlesLandkreisL = circlesRhoenGrabfeldL;
 			circlesLandkreisR = circlesRhoenGrabfeldR;
+			markersLandkreisEinL = markersRhoenGrabfeldEinL;
+			markersLandkreisEinR = markersRhoenGrabfeldEinR;
 			markersLandkreisL = markersRhoenGrabfeldL;
 			markersLandkreisR = markersRhoenGrabfeldR;
 			break;
 		case "Schweinfurt":
 			circlesLandkreisL = circlesSchweinfurtL;
 			circlesLandkreisR = circlesSchweinfurtR;
+			markersLandkreisEinL = markersSchweinfurtEinL;
+			markersLandkreisEinR = markersSchweinfurtEinR;
 			markersLandkreisL = markersSchweinfurtL;
 			markersLandkreisR = markersSchweinfurtR;
 			break;
 		case "Wuerzburg":
 			circlesLandkreisL = circlesWuerzburgL;
 			circlesLandkreisR = circlesWuerzburgR;
+			markersLandkreisEinL = markersWuerzburgEinL;
+			markersLandkreisEinR = markersWuerzburgEinR;
 			markersLandkreisL = markersWuerzburgL;
 			markersLandkreisR = markersWuerzburgR;
 			break;
@@ -417,6 +413,10 @@ function changeCircles(whichLandkreisString,makeVisible){
 			markersLandkreisL[i].setMap(leftMap);
 			markersLandkreisR[i].setMap(rightMap);
 		}
+		for (var i=0; i<markersLandkreisEinL.length; i++){
+			markersLandkreisEinL[i].setMap(leftMap);
+			markersLandkreisEinR[i].setMap(rightMap);
+		}
 	}
 	else {
 		for (var i=0; i<circlesLandkreisL.length; i++){
@@ -424,6 +424,10 @@ function changeCircles(whichLandkreisString,makeVisible){
 			circlesLandkreisR[i].setMap(null);
 			markersLandkreisL[i].setMap(null);
 			markersLandkreisR[i].setMap(null);
+		}
+		for (var i=0; i<markersLandkreisEinL.length; i++){
+			markersLandkreisEinL[i].setMap(null);
+			markersLandkreisEinR[i].setMap(null);
 		}
 	}
 

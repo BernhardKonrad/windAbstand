@@ -66,6 +66,8 @@ cat RhoenGrabfeld-ein.txt >> NV.html
 cat Schweinfurt-ein.txt >> NV.html
 cat Wuerzburg-ein.txt >> NV.html
 
+# sed -i 's/\ä/\&auml\;/g;s/\Ä/\&Auml\;/g;s/\ö/\&ouml\;/g;s/\Ö/\&Ouml\;/g;s/\ü/\&uuml\;/g;s/\Ü/\&Uuml\;/g;s/\ß/\&szlig\;/g' NV.html
+# cat NV.html | sed 's/\\FC/\&uuml\;/g;' > NV1.html
 
 cat post.html >> NV.html
 
