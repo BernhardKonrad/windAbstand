@@ -2,6 +2,9 @@ import sys
 import re
 
 def writeMarker(file,lat,lng,ortsname,whichMap='map-canvas'):
+	on = re.compile('[^a-zA-Z0-9]')
+	on.subn('_',ortsname)	
+#	ortsname = ortsname.translate(str.maketrans(translate_table))
 	file.write('var marker = new google.maps.Marker({position:new google.maps.LatLng(' + str(lat) + ', ' + str(lng) + '),icon:"http://maps.google.com/mapfiles/ms/icons/blue-dot.png",title:"' + re.escape(ortsname) + '"});')
 	file.write('marker.setMap(map);')
 

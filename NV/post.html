@@ -43,7 +43,8 @@ function getMarkers(Ortschaften){
 		var marker = new google.maps.Marker({
 			position: new google.maps.LatLng(Ortschaften[i][1],Ortschaften[i][2]),
 			map: null,
-			icon: MarkerPin(Ortschaften[i][3])
+			icon: MarkerPin(Ortschaften[i][3]),
+			title: Ortschaften[i][0]
 		});
 		markers.push(marker);
 		}
