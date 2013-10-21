@@ -1,9 +1,9 @@
-
+﻿
 // Functions to use database locations
 
 function getLandkreisPoints(Landkreis){
 	points = [];
-	for (var i=0; i<Landkreis.length; i++){
+	for (var i=0, length=Landkreis.length; i<length; i++){
 		var point = new google.maps.LatLng(Landkreis[i][1],Landkreis[i][2])
 		points.push(point)
 	}
@@ -26,7 +26,7 @@ function getPolygon(Landkreis){
 
 function getMarkers(Ortschaften){
 	var markers = []
-	for (var i=0; i < Ortschaften.length; i++){
+	for (var i=0, length=Ortschaften.length; i < length; i++){
 		var marker = new google.maps.Marker({
 			position: new google.maps.LatLng(Ortschaften[i][1],Ortschaften[i][2]),
 			map: null,
@@ -40,7 +40,7 @@ function getMarkers(Ortschaften){
 
 function getCircles(Ortschaften,rad){
 	var circles = []
-	for (var i=0; i < Ortschaften.length; i++){
+	for (var i=0, length=Ortschaften.length; i < length; i++){
 		var circle = new google.maps.Circle({
 			center: new google.maps.LatLng(Ortschaften[i][1],Ortschaften[i][2]),
 			map: null,
@@ -199,60 +199,60 @@ function getWhichMap(whichMap){
 
 function setRadius(whichMap,radius) {
 	if (whichMap == "left") {
-		for (var i=0; i<circlesAschaffenburgL.length; i++){
+		for (var i=0, length=circlesAschaffenburgL.length; i<length; i++){
 			circlesAschaffenburgL[i].setRadius(radius);
 		}
-		for (var i=0; i<circlesBadKissingenL.length; i++){
+		for (var i=0, length=circlesBadKissingenL.length; i<length; i++){
 			circlesBadKissingenL[i].setRadius(radius);
 		}
-		for (var i=0; i<circlesHassbergeL.length; i++){
+		for (var i=0, length=circlesHassbergeL.length; i<length; i++){
 			circlesHassbergeL[i].setRadius(radius);
 		}
-		for (var i=0; i<circlesKitzingenL.length; i++){
+		for (var i=0, length=circlesKitzingenL.length; i<length; i++){
 			circlesKitzingenL[i].setRadius(radius);
 		}
-		for (var i=0; i<circlesMainSpessartL.length; i++){
+		for (var i=0, length=circlesMainSpessartL.length; i<length; i++){
 			circlesMainSpessartL[i].setRadius(radius);
 		}
-		for (var i=0; i<circlesMiltenbergL.length; i++){
+		for (var i=0, length=circlesMiltenbergL.length; i<length; i++){
 			circlesMiltenbergL[i].setRadius(radius);
 		}
-		for (var i=0; i<circlesRhoenGrabfeldL.length; i++){
+		for (var i=0, length=circlesRhoenGrabfeldL.length; i<length; i++){
 			circlesRhoenGrabfeldL[i].setRadius(radius);
 		}
-		for (var i=0; i<circlesSchweinfurtL.length; i++){
+		for (var i=0, length=circlesSchweinfurtL.length; i<length; i++){
 			circlesSchweinfurtL[i].setRadius(radius);
 		}
-		for (var i=0; i<circlesWuerzburgL.length; i++){
+		for (var i=0, length=circlesWuerzburgL.length; i<length; i++){
 			circlesWuerzburgL[i].setRadius(radius);
 		}
 	}
 	else {
-		for (var i=0; i<circlesAschaffenburgR.length; i++){
+		for (var i=0, length=circlesAschaffenburgR.length; i<length; i++){
 			circlesAschaffenburgR[i].setRadius(radius);
 		}
-		for (var i=0; i<circlesBadKissingenR.length; i++){
+		for (var i=0, length=circlesBadKissingenR.length; i<length; i++){
 			circlesBadKissingenR[i].setRadius(radius);
 		}
-		for (var i=0; i<circlesHassbergeR.length; i++){
+		for (var i=0, length=circlesHassbergeR.length; i<length; i++){
 			circlesHassbergeR[i].setRadius(radius);
 		}
-		for (var i=0; i<circlesKitzingenR.length; i++){
+		for (var i=0, length=circlesKitzingenR.length; i<length; i++){
 			circlesKitzingenR[i].setRadius(radius);
 		}
-		for (var i=0; i<circlesMainSpessartR.length; i++){
+		for (var i=0, length=circlesMainSpessartR.length; i<length; i++){
 			circlesMainSpessartR[i].setRadius(radius);
 		}
-		for (var i=0; i<circlesMiltenbergR.length; i++){
+		for (var i=0, length=circlesMiltenbergR.length; i<length; i++){
 			circlesMiltenbergR[i].setRadius(radius);
 		}
-		for (var i=0; i<circlesRhoenGrabfeldR.length; i++){
+		for (var i=0, length=circlesRhoenGrabfeldR.length; i<length; i++){
 			circlesRhoenGrabfeldR[i].setRadius(radius);
 		}
-		for (var i=0; i<circlesSchweinfurtR.length; i++){
+		for (var i=0, length=circlesSchweinfurtR.length; i<length; i++){
 			circlesSchweinfurtR[i].setRadius(radius);
 		}
-		for (var i=0; i<circlesWuerzburgR.length; i++){
+		for (var i=0, length=circlesWuerzburgR.length; i<length; i++){
 			circlesWuerzburgR[i].setRadius(radius);
 		}
 	}
@@ -260,7 +260,7 @@ function setRadius(whichMap,radius) {
 
 function setMap(Ortschaften,whichMap){
 	thisMap = getWhichMap(whichMap);
-	for (var i=0; i<Ortschaften.length; i++){
+	for (var i=0, length=Ortschaften.length; i<length; i++){
 		Ortschaften[i].setMap(thisMap);
 	}
 }
@@ -269,60 +269,60 @@ function setMap(Ortschaften,whichMap){
 function makeCirclesTransparent(whichMap,alpha) {
 	var strokeWeight = 1*!(alpha==0 || alpha==1);
 	if (whichMap == "left") {
-		for (var i=0; i<circlesAschaffenburgL.length; i++){
+		for (var i=0, length=circlesAschaffenburgL.length; i<length; i++){
 			circlesAschaffenburgL[i].setOptions({'fillOpacity': alpha, 'strokeWeight': strokeWeight});
 		}
-		for (var i=0; i<circlesBadKissingenL.length; i++){
+		for (var i=0, length=circlesBadKissingenL.length; i<length; i++){
 			circlesBadKissingenL[i].setOptions({'fillOpacity': alpha, 'strokeWeight': strokeWeight});
 		}
-		for (var i=0; i<circlesHassbergeL.length; i++){
+		for (var i=0, length=circlesHassbergeL.length; i<length; i++){
 			circlesHassbergeL[i].setOptions({'fillOpacity': alpha, 'strokeWeight': strokeWeight});
 		}
-		for (var i=0; i<circlesKitzingenL.length; i++){
+		for (var i=0, length=circlesKitzingenL.length; i<length; i++){
 			circlesKitzingenL[i].setOptions({'fillOpacity': alpha, 'strokeWeight': strokeWeight});
 		}
-		for (var i=0; i<circlesMainSpessartL.length; i++){
+		for (var i=0, length=circlesMainSpessartL.length; i<length; i++){
 			circlesMainSpessartL[i].setOptions({'fillOpacity': alpha, 'strokeWeight': strokeWeight});
 		}
-		for (var i=0; i<circlesMiltenbergL.length; i++){
+		for (var i=0, length=circlesMiltenbergL.length; i<length; i++){
 			circlesMiltenbergL[i].setOptions({'fillOpacity': alpha, 'strokeWeight': strokeWeight});
 		}
-		for (var i=0; i<circlesRhoenGrabfeldL.length; i++){
+		for (var i=0, length=circlesRhoenGrabfeldL.length; i<length; i++){
 			circlesRhoenGrabfeldL[i].setOptions({'fillOpacity': alpha, 'strokeWeight': strokeWeight});
 		}
-		for (var i=0; i<circlesSchweinfurtL.length; i++){
+		for (var i=0, length=circlesSchweinfurtL.length; i<length; i++){
 			circlesSchweinfurtL[i].setOptions({'fillOpacity': alpha, 'strokeWeight': strokeWeight});
 		}
-		for (var i=0; i<circlesWuerzburgL.length; i++){
+		for (var i=0, length=circlesWuerzburgL.length; i<length; i++){
 			circlesWuerzburgL[i].setOptions({'fillOpacity': alpha, 'strokeWeight': strokeWeight});
 		}
 	}
 	else {
-		for (var i=0; i<circlesAschaffenburgR.length; i++){
+		for (var i=0, length=circlesAschaffenburgR.length; i<length; i++){
 			circlesAschaffenburgR[i].setOptions({'fillOpacity': alpha, 'strokeWeight': strokeWeight});
 		}
-		for (var i=0; i<circlesBadKissingenR.length; i++){
+		for (var i=0, length=circlesBadKissingenR.length; i<length; i++){
 			circlesBadKissingenR[i].setOptions({'fillOpacity': alpha, 'strokeWeight': strokeWeight});
 		}
-		for (var i=0; i<circlesHassbergeR.length; i++){
+		for (var i=0, length=circlesHassbergeR.length; i<length; i++){
 			circlesHassbergeR[i].setOptions({'fillOpacity': alpha, 'strokeWeight': strokeWeight});
 		}
-		for (var i=0; i<circlesKitzingenR.length; i++){
+		for (var i=0, length=circlesKitzingenR.length; i<length; i++){
 			circlesKitzingenR[i].setOptions({'fillOpacity': alpha, 'strokeWeight': strokeWeight});
 		}
-		for (var i=0; i<circlesMainSpessartR.length; i++){
+		for (var i=0, length=circlesMainSpessartR.length; i<length; i++){
 			circlesMainSpessartR[i].setOptions({'fillOpacity': alpha, 'strokeWeight': strokeWeight});
 		}
-		for (var i=0; i<circlesMiltenbergR.length; i++){
+		for (var i=0, length=circlesMiltenbergR.length; i<length; i++){
 			circlesMiltenbergR[i].setOptions({'fillOpacity': alpha, 'strokeWeight': strokeWeight});
 		}
-		for (var i=0; i<circlesRhoenGrabfeldR.length; i++){
+		for (var i=0, length=circlesRhoenGrabfeldR.length; i<length; i++){
 			circlesRhoenGrabfeldR[i].setOptions({'fillOpacity': alpha, 'strokeWeight': strokeWeight});
 		}
-		for (var i=0; i<circlesSchweinfurtR.length; i++){
+		for (var i=0, length=circlesSchweinfurtR.length; i<length; i++){
 			circlesSchweinfurtR[i].setOptions({'fillOpacity': alpha, 'strokeWeight': strokeWeight});
 		}
-		for (var i=0; i<circlesWuerzburgR.length; i++){
+		for (var i=0, length=circlesWuerzburgR.length; i<length; i++){
 			circlesWuerzburgR[i].setOptions({'fillOpacity': alpha, 'strokeWeight': strokeWeight});
 		}
 	}
@@ -407,25 +407,25 @@ function changeCircles(whichLandkreisString,makeVisible){
 			break;
 	}
 	if (makeVisible) {
-		for (var i=0; i<circlesLandkreisL.length; i++){
+		for (var i=0, length=circlesLandkreisL.length; i<length; i++){
 			circlesLandkreisL[i].setMap(leftMap);
 			circlesLandkreisR[i].setMap(rightMap);
 			markersLandkreisL[i].setMap(leftMap);
 			markersLandkreisR[i].setMap(rightMap);
 		}
-		for (var i=0; i<markersLandkreisEinL.length; i++){
+		for (var i=0, length=markersLandkreisEinL.length; i<length; i++){
 			markersLandkreisEinL[i].setMap(leftMap);
 			markersLandkreisEinR[i].setMap(rightMap);
 		}
 	}
 	else {
-		for (var i=0; i<circlesLandkreisL.length; i++){
+		for (var i=0, length=circlesLandkreisL.length; i<length; i++){
 			circlesLandkreisL[i].setMap(null);
 			circlesLandkreisR[i].setMap(null);
 			markersLandkreisL[i].setMap(null);
 			markersLandkreisR[i].setMap(null);
 		}
-		for (var i=0; i<markersLandkreisEinL.length; i++){
+		for (var i=0, length=markersLandkreisEinL.length; i<length; i++){
 			markersLandkreisEinL[i].setMap(null);
 			markersLandkreisEinR[i].setMap(null);
 		}
@@ -647,8 +647,8 @@ function showRadiusValueR(newValue)
 
 <form action="">
 <input type="checkbox" id="checkAschaffenburg" onclick="changeCircles('Aschaffenburg',this.checked)"> Aschaffenburg
-<input type="checkbox" disabled id="checkBadKissingen" onclick="changeCircles('BadKissingen',this.checked)"> Bad Kissingen
-<input type="checkbox" disabled id="checkHassberge" onclick="changeCircles('Hassberge',this.checked)"> Haßberge
+<input type="checkbox" id="checkBadKissingen" onclick="changeCircles('BadKissingen',this.checked)"> Bad Kissingen
+<input type="checkbox" id="checkHassberge" onclick="changeCircles('Hassberge',this.checked)"> Haßberge
 <input type="checkbox" id="checkKitzingen" onclick="changeCircles('Kitzingen',this.checked)"> Kitzingen
 <input type="checkbox" id="checkMainSpessart" onclick="changeCircles('MainSpessart',this.checked)"> Main Spessart
 <input type="checkbox" disabled id="checkMiltenberg" onclick="changeCircles('Miltenberg',this.checked)"> Miltenberg
