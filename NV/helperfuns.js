@@ -1,5 +1,18 @@
-﻿
-// Functions to use database locations
+function MarkerPin(color) {
+	var pin = new google.maps.MarkerImage(
+	"http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|" + color,new google.maps.Size(21, 34),new google.maps.Point(0,0),new google.maps.Point(10, 34));
+	return pin;
+}
+
+function set_info_window(map, marker, info_window, content) {
+	google.maps.event.addListener(marker, 'click', function () {
+		info_window.setContent(content);
+		info_window.open(map, marker);
+	})
+}
+
+
+// Translate database variables
 
 function getLandkreisPoints(Landkreis){
 	points = [];
@@ -31,7 +44,7 @@ function getMarkers(Ortschaften){
 			position: new google.maps.LatLng(Ortschaften[i][1],Ortschaften[i][2]),
 			map: null,
 			icon: MarkerPin(Ortschaften[i][3]),
-			title: Ortschaften[i][0]
+			title: Ortschaften[i][0] + '\n' + Ortschaften[i][1] + '\n' + Ortschaften[i][2]
 		});
 		markers.push(marker);
 		}
@@ -46,7 +59,7 @@ function getCircles(Ortschaften,rad){
 			map: null,
 			radius: rad,
 			fillColor: Ortschaften[i][3],
-			strokeWeight: 1,
+			strokeWeight: 0,
 			fillOpacity: 0.3
 		});
 		circles.push(circle);
@@ -54,8 +67,9 @@ function getCircles(Ortschaften,rad){
 	return(circles)
 }
 
-// Translate database into variables
 
+
+//
 // Landkreise
 var LKAschaffenburgL = getPolygon(LKAschaffenburg)
 var LKAschaffenburgR = getPolygon(LKAschaffenburg)
@@ -139,50 +153,7 @@ var circlesSchweinfurtR = getCircles(OrtschaftenSchweinfurt,2000)
 var circlesWuerzburgL = getCircles(OrtschaftenWuerzburg,1000)
 var circlesWuerzburgR = getCircles(OrtschaftenWuerzburg,2000)
 
-
-
-
-// Initialize
-
-	var mapOptions = {
-		zoom: 9,
-		center: new google.maps.LatLng(50,10),
-		mapTypeId: google.maps.MapTypeId.HYBRID
-	};
-
-function initialize() {
-	var mapL = new google.maps.Map(document.getElementById('leftMap'),mapOptions);
-	var mapR = new google.maps.Map(document.getElementById('rightMap'),mapOptions);
-
-	LKAschaffenburgL.setMap(mapL);
-	LKAschaffenburgR.setMap(mapR);
-	LKBadKissingenL.setMap(mapL);
-	LKBadKissingenR.setMap(mapR);
-	LKHassbergeL.setMap(mapL);
-	LKHassbergeR.setMap(mapR);
-	LKKitzingenL.setMap(mapL);
-	LKKitzingenR.setMap(mapR);
-	LKMainSpessartL.setMap(mapL);
-	LKMainSpessartR.setMap(mapR);
-	LKMiltenbergL.setMap(mapL);
-	LKMiltenbergR.setMap(mapR);
-	LKRhoenGrabfeldL.setMap(mapL);
-	LKRhoenGrabfeldR.setMap(mapR);
-	LKSchweinfurtL.setMap(mapL);
-	LKSchweinfurtR.setMap(mapR);
-	LKWuerzburgL.setMap(mapL);
-	LKWuerzburgR.setMap(mapR);
-}
-
-// END Initialize
-
-function centerRightMap(){
-	leftMap = LKAschaffenburgL.getMap();
-	rightMap = LKAschaffenburgR.getMap();
-	rightMap.setCenter(leftMap.getCenter());
-	rightMap.setZoom(leftMap.getZoom());
-}
-
+//
 
 function getWhichMap(whichMap){
 	if (whichMap == "left"){
@@ -267,7 +238,7 @@ function setMap(Ortschaften,whichMap){
 
 
 function makeCirclesTransparent(whichMap,alpha) {
-	var strokeWeight = 1*!(alpha==0 || alpha==1);
+	var strokeWeight = 1*!(alpha==0 || alpha==0.3 || alpha==1);
 	if (whichMap == "left") {
 		for (var i=0, length=circlesAschaffenburgL.length; i<length; i++){
 			circlesAschaffenburgL[i].setOptions({'fillOpacity': alpha, 'strokeWeight': strokeWeight});
@@ -473,148 +444,148 @@ function makeMarkersVisible(whichMap,whichMarkers) {
 
 	if (whichMap == "left") {
 		if (isActive('checkAschaffenburg')){
-			for (var i=0; i<markersAschaffenburgL.length; i++){
+			for (var i=0, length=markersAschaffenburgL.length; i<length; i++){
 				markersAschaffenburgL[i].setMap(alleMap);
 			}
-			for (var i=0; i<markersAschaffenburgEinL.length; i++){
+			for (var i=0, length=markersAschaffenburgEinL.length; i<length; i++){
 				markersAschaffenburgEinL[i].setMap(einerMap);
 			}
 		}
 		if (isActive('checkBadKissingen')){
-			for (var i=0; i<markersBadKissingenL.length; i++){
+			for (var i=0, length=markersBadKissingenL.length; i<length; i++){
 				markersBadKissingenL[i].setMap(alleMap);
 			}
-			for (var i=0; i<markersBadKissingenEinL.length; i++){
+			for (var i=0, length=markersBadKissingenEinL.length; i<length; i++){
 				markersBadKissingenEinL[i].setMap(einerMap);
 			}
 		}
 		if (isActive('checkHassberge')){
-			for (var i=0; i<markersHassbergeL.length; i++){
+			for (var i=0, length=markersHassbergeL.length; i<length; i++){
 				markersHassbergeL[i].setMap(alleMap);
 			}
-			for (var i=0; i<markersHassbergeEinL.length; i++){
+			for (var i=0, length=markersHassbergeEinL.length; i<length; i++){
 				markersHassbergeEinL[i].setMap(einerMap);
 			}
 		}
 		if (isActive('checkKitzingen')){
-			for (var i=0; i<markersKitzingenL.length; i++){
+			for (var i=0, length=markersKitzingenL.length; i<length; i++){
 				markersKitzingenL[i].setMap(alleMap);
 			}
-			for (var i=0; i<markersKitzingenEinL.length; i++){
+			for (var i=0, length=markersKitzingenEinL.length; i<length; i++){
 				markersKitzingenEinL[i].setMap(einerMap);
 			}
 		}
 		if (isActive('checkMainSpessart')){
-			for (var i=0; i<markersMainSpessartL.length; i++){
+			for (var i=0, length=markersMainSpessartL.length; i<length; i++){
 				markersMainSpessartL[i].setMap(alleMap);
 			}
-			for (var i=0; i<markersMainSpessartEinL.length; i++){
+			for (var i=0, length=markersMainSpessartEinL.length; i<length; i++){
 				markersMainSpessartEinL[i].setMap(einerMap);
 			}
 		}
 		if (isActive('checkMiltenberg')){
-			for (var i=0; i<markersMiltenbergL.length; i++){
+			for (var i=0, length=markersMiltenbergL.length; i<length; i++){
 				markersMiltenbergL[i].setMap(alleMap);
 			}
-			for (var i=0; i<markersMiltenbergEinL.length; i++){
+			for (var i=0, length=markersMiltenbergEinL.length; i<length; i++){
 				markersMiltenbergEinL[i].setMap(einerMap);
 			}
 		}
 		if (isActive('checkRhoenGrabfeld')){
-			for (var i=0; i<markersRhoenGrabfeldL.length; i++){
+			for (var i=0, length=markersRhoenGrabfeldL.length; i<length; i++){
 				markersRhoenGrabfeldL[i].setMap(alleMap);
 			}
-			for (var i=0; i<markersRhoenGrabfeldEinL.length; i++){
+			for (var i=0, length=markersRhoenGrabfeldEinL.length; i<length; i++){
 				markersRhoenGrabfeldEinL[i].setMap(einerMap);
 			}
 		}
 		if (isActive('checkSchweinfurt')){
-			for (var i=0; i<markersSchweinfurtL.length; i++){
+			for (var i=0, length=markersSchweinfurtL.length; i<length; i++){
 				markersSchweinfurtL[i].setMap(alleMap);
 			}
-			for (var i=0; i<markersSchweinfurtEinL.length; i++){
+			for (var i=0, length=markersSchweinfurtEinL.length; i<length; i++){
 				markersSchweinfurtEinL[i].setMap(einerMap);
 			}
 		}
 		if (isActive('checkWuerzburg')){
-			for (var i=0; i<markersWuerzburgL.length; i++){
+			for (var i=0, length=markersWuerzburgL.length; i<length; i++){
 				markersWuerzburgL[i].setMap(alleMap);
 			}
-			for (var i=0; i<markersWuerzburgEinL.length; i++){
+			for (var i=0, length=markersWuerzburgEinL.length; i<length; i++){
 				markersWuerzburgEinL[i].setMap(einerMap);
 			}
 		}
 	}
 	else if (whichMap == "right") {
 		if (isActive('checkAschaffenburg')){
-			for (var i=0; i<markersAschaffenburgR.length; i++){
+			for (var i=0, length=markersAschaffenburgR.length; i<length; i++){
 				markersAschaffenburgR[i].setMap(alleMap);
 			}
-			for (var i=0; i<markersAschaffenburgEinR.length; i++){
+			for (var i=0, length=markersAschaffenburgEinR.length; i<length; i++){
 				markersAschaffenburgEinR[i].setMap(einerMap);
 			}
 		}
 		if (isActive('checkBadKissingen')){
-			for (var i=0; i<markersBadKissingenR.length; i++){
+			for (var i=0, length=markersBadKissingenR.length; i<length; i++){
 				markersBadKissingenR[i].setMap(alleMap);
 			}
-			for (var i=0; i<markersBadKissingenEinR.length; i++){
+			for (var i=0, length=markersBadKissingenEinR.length; i<length; i++){
 				markersBadKissingenEinR[i].setMap(einerMap);
 			}
 		}
 		if (isActive('checkHassberge')){
-			for (var i=0; i<markersHassbergeR.length; i++){
+			for (var i=0, length=markersHassbergeR.length; i<length; i++){
 				markersHassbergeR[i].setMap(alleMap);
 			}
-			for (var i=0; i<markersHassbergeEinR.length; i++){
+			for (var i=0, length=markersHassbergeEinR.length; i<length; i++){
 				markersHassbergeEinR[i].setMap(einerMap);
 			}
 		}
 		if (isActive('checkKitzingen')){
-			for (var i=0; i<markersKitzingenR.length; i++){
+			for (var i=0, length=markersKitzingenR.length; i<length; i++){
 				markersKitzingenR[i].setMap(alleMap);
 			}
-			for (var i=0; i<markersKitzingenEinR.length; i++){
+			for (var i=0, length=markersKitzingenEinR.length; i<length; i++){
 				markersKitzingenEinR[i].setMap(einerMap);
 			}
 		}
 		if (isActive('checkMainSpessart')){
-			for (var i=0; i<markersMainSpessartR.length; i++){
+			for (var i=0, length=markersMainSpessartR.length; i<length; i++){
 				markersMainSpessartR[i].setMap(alleMap);
 			}
-			for (var i=0; i<markersMainSpessartEinR.length; i++){
+			for (var i=0, length=markersMainSpessartEinR.length; i<length; i++){
 				markersMainSpessartEinR[i].setMap(einerMap);
 			}
 		}
 		if (isActive('checkMiltenberg')){
-			for (var i=0; i<markersMiltenbergR.length; i++){
+			for (var i=0, length=markersMiltenbergR.length; i<length; i++){
 				markersMiltenbergR[i].setMap(alleMap);
 			}
-			for (var i=0; i<markersMiltenbergEinR.length; i++){
+			for (var i=0, length=markersMiltenbergEinR.length; i<length; i++){
 				markersMiltenbergEinR[i].setMap(einerMap);
 			}
 		}
 		if (isActive('checkRhoenGrabfeld')){
-			for (var i=0; i<markersRhoenGrabfeldR.length; i++){
+			for (var i=0, length=markersRhoenGrabfeldR.length; i<length; i++){
 				markersRhoenGrabfeldR[i].setMap(alleMap);
 			}
-			for (var i=0; i<markersRhoenGrabfeldEinR.length; i++){
+			for (var i=0, length=markersRhoenGrabfeldEinR.length; i<length; i++){
 				markersRhoenGrabfeldEinR[i].setMap(einerMap);
 			}
 		}
 		if (isActive('checkSchweinfurt')){
-			for (var i=0; i<markersSchweinfurtR.length; i++){
+			for (var i=0, length=markersSchweinfurtR.length; i<length; i++){
 				markersSchweinfurtR[i].setMap(alleMap);
 			}
-			for (var i=0; i<markersSchweinfurtEinR.length; i++){
+			for (var i=0, length=markersSchweinfurtEinR.length; i<length; i++){
 				markersSchweinfurtEinR[i].setMap(einerMap);
 			}
 		}
 		if (isActive('checkWuerzburg')){
-			for (var i=0; i<markersWuerzburgR.length; i++){
+			for (var i=0, length=markersWuerzburgR.length; i<length; i++){
 				markersWuerzburgR[i].setMap(alleMap);
 			}
-			for (var i=0; i<markersWuerzburgEinR.length; i++){
+			for (var i=0, length=markersWuerzburgEinR.length; i<length; i++){
 				markersWuerzburgEinR[i].setMap(einerMap);
 			}
 		}
@@ -624,85 +595,3 @@ function makeMarkersVisible(whichMap,whichMarkers) {
 function isActive(whichLandkreis){
 	return(document.getElementById(whichLandkreis).checked);
 }
-
-google.maps.event.addDomListener(window, 'load', initialize);
-</script>
-
-</head>
-<body>
-
-<script type="text/javascript">
-function showRadiusValueL(newValue)
-{
-		document.getElementById("radiusL").innerHTML=newValue + "m";
-}
-
-function showRadiusValueR(newValue)
-{
-		document.getElementById("radiusR").innerHTML=newValue + "m";
-}
-</script>
-
-<center><button type="button" onclick="centerRightMap()"> Rechte Karte anpassen </button></center>
-
-<form action="">
-<input type="checkbox" id="checkAschaffenburg" onclick="changeCircles('Aschaffenburg',this.checked)"> Aschaffenburg
-<input type="checkbox" id="checkBadKissingen" onclick="changeCircles('BadKissingen',this.checked)"> Bad Kissingen
-<input type="checkbox" id="checkHassberge" onclick="changeCircles('Hassberge',this.checked)"> Haßberge
-<input type="checkbox" id="checkKitzingen" onclick="changeCircles('Kitzingen',this.checked)"> Kitzingen
-<input type="checkbox" id="checkMainSpessart" onclick="changeCircles('MainSpessart',this.checked)"> Main Spessart
-<input type="checkbox" disabled id="checkMiltenberg" onclick="changeCircles('Miltenberg',this.checked)"> Miltenberg
-<input type="checkbox" disabled id="checkRhoenGrabfeld" onclick="changeCircles('RhoenGrabfeld',this.checked)"> Rhön-Grabfeld
-<input type="checkbox" id="checkSchweinfurt" onclick="changeCircles('Schweinfurt',this.checked)"> Schweinfurt
-<input type="checkbox" id="checkWuerzburg" onclick="changeCircles('Wuerzburg',this.checked)"> Würzburg
-</form>
-  <table border="0">
-	<tr>
-	<td>
-<form>
-<button type="button" onclick="setRadius('left',Number(document.getElementById('leftRadius').value))"> Zeichne neuen Radius </button>
-<input type="range" name="leftRadius" id="leftRadius" min="500" max="5000" step="100" value="1000" onchange="showRadiusValueL(this.value)">
-<span id="radiusL">1000m</span>
-</form>
-
-Transparenz:
-<input name="transparenzL" type="radio" onchange="makeCirclesTransparent('left',0)"> 0
-<input name="transparenzL" type="radio" onchange="makeCirclesTransparent('left',0.05)"> 0.05
-<input name="transparenzL" type="radio" checked onchange="makeCirclesTransparent('left',0.3)"> 0.3
-<input name="transparenzL" type="radio" onchange="makeCirclesTransparent('left',1)"> 1
-
-<form>
-Markierungen:
-<input name="markersL" type="radio" checked onchange="makeMarkersVisible('left','keine')"> Keine
-<input name="markersL" type="radio" onchange="makeMarkersVisible('left','einer')"> Einer pro Ortschaft
-<input name="markersL" type="radio" onchange="makeMarkersVisible('left','alle')"> Alle
-</form>
-</td>
-
-
-<td>
-<form>
-<button type="button" onclick="setRadius('right',Number(document.getElementById('rightRadius').value))"> Zeichne neuen Radius </button>
-<input type="range" name="rightRadius" id="rightRadius" min="500" max="5000" step="100" value="2000" onchange="showRadiusValueR(this.value)">
-<span id="radiusR">2000m</span>
-</form>
-Transparenz:
-<input name="transparenzR" type="radio" onchange="makeCirclesTransparent('right',0)"> 0
-<input name="transparenzR" type="radio" onchange="makeCirclesTransparent('right',0.05)"> 0.05
-<input name="transparenzR" type="radio" checked onchange="makeCirclesTransparent('right',0.3)"> 0.3
-<input name="transparenzR" type="radio" onchange="makeCirclesTransparent('right',1)"> 1
-<form>
-Markierungen:
-<input name="markersR" type="radio" checked onchange="makeMarkersVisible('right','keine')"> Keine
-<input name="markersR" type="radio" onchange="makeMarkersVisible('right','einer')"> Einer pro Ortschaft
-<input name="markersR" type="radio" onchange="makeMarkersVisible('right','alle')"> Alle
-</form>
-</td>
-</tr>
-<tr>
-	<td> <div id="leftMap" style="height:700px;width:600px"></div> </td>
-	<td> <div id="rightMap" style="height:700px;width:600px" ></div> </td>
-	</tr>
-  </table>
- </body>
-</html>

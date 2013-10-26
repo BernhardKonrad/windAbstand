@@ -31,45 +31,40 @@ python einMarkerNV.py ../Ortschaften/Schweinfurt.txt 0e97ed
 python einMarkerNV.py ../Ortschaften/Wuerzburg.txt 077f2b
 
 
-cat pre.html > NV.html
+cat aschaffenburg-LK.txt > landkreise.js
+cat bad-kissingen-LK.txt >> landkreise.js
+cat hassberge-LK.txt >> landkreise.js
+cat kitzingen-LK.txt >> landkreise.js
+cat main-spessart-LK.txt >> landkreise.js
+cat miltenberg-LK.txt >> landkreise.js
+cat rhoen-grabfeld-LK.txt >> landkreise.js
+cat schweinfurt-land-LK.txt >> landkreise.js
+cat wue-land-LK.txt >> landkreise.js
 
 
-cat aschaffenburg-LK.txt >> NV.html
-cat bad-kissingen-LK.txt >> NV.html
-cat hassberge-LK.txt >> NV.html
-cat kitzingen-LK.txt >> NV.html
-cat main-spessart-LK.txt >> NV.html
-cat miltenberg-LK.txt >> NV.html
-cat rhoen-grabfeld-LK.txt >> NV.html
-cat schweinfurt-land-LK.txt >> NV.html
-cat wue-land-LK.txt >> NV.html
+cat Aschaffenburg-Ort.txt > ortschaften.js
+cat BadKissingen-Ort.txt >> ortschaften.js
+cat Hassberge-Ort.txt >> ortschaften.js
+cat Kitzingen-Ort.txt >> ortschaften.js
+cat MainSpessart-Ort.txt >> ortschaften.js
+cat Miltenberg-Ort.txt >> ortschaften.js
+cat RhoenGrabfeld-Ort.txt >> ortschaften.js
+cat Schweinfurt-Ort.txt >> ortschaften.js
+cat Wuerzburg-Ort.txt >> ortschaften.js
 
 
-cat Aschaffenburg-Ort.txt >> NV.html
-cat BadKissingen-Ort.txt >> NV.html
-cat Hassberge-Ort.txt >> NV.html
-cat Kitzingen-Ort.txt >> NV.html
-cat MainSpessart-Ort.txt >> NV.html
-cat Miltenberg-Ort.txt >> NV.html
-cat RhoenGrabfeld-Ort.txt >> NV.html
-cat Schweinfurt-Ort.txt >> NV.html
-cat Wuerzburg-Ort.txt >> NV.html
-
-
-cat Aschaffenburg-ein.txt >> NV.html
-cat BadKissingen-ein.txt >> NV.html
-cat Hassberge-ein.txt >> NV.html
-cat Kitzingen-ein.txt >> NV.html
-cat MainSpessart-ein.txt >> NV.html
-cat Miltenberg-ein.txt >> NV.html
-cat RhoenGrabfeld-ein.txt >> NV.html
-cat Schweinfurt-ein.txt >> NV.html
-cat Wuerzburg-ein.txt >> NV.html
+cat Aschaffenburg-ein.txt >> ortschaften.js
+cat BadKissingen-ein.txt >> ortschaften.js
+cat Hassberge-ein.txt >> ortschaften.js
+cat Kitzingen-ein.txt >> ortschaften.js
+cat MainSpessart-ein.txt >> ortschaften.js
+cat Miltenberg-ein.txt >> ortschaften.js
+cat RhoenGrabfeld-ein.txt >> ortschaften.js
+cat Schweinfurt-ein.txt >> ortschaften.js
+cat Wuerzburg-ein.txt >> ortschaften.js
 
 # sed -i 's/\ä/\&auml\;/g;s/\Ä/\&Auml\;/g;s/\ö/\&ouml\;/g;s/\Ö/\&Ouml\;/g;s/\ü/\&uuml\;/g;s/\Ü/\&Uuml\;/g;s/\ß/\&szlig\;/g' NV.html
 # cat NV.html | sed 's/\\FC/\&uuml\;/g;' > NV1.html
-
-cat post.html >> NV.html
 
 rm *.txt
 
