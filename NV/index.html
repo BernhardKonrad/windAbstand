@@ -1,165 +1,156 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 
 <html>
-  
+
 <head>
-    
+
 <title>Abstand Windräder</title>
-    
+
 <meta name="viewport" content="initial-scale=0.5, user-scalable=no">
-    
+
 <meta charset="utf-8">
-    
+
 <link href="https://developers.google.com/maps/documentation/javascript/examples/default.css" rel="stylesheet">
 
 
 
-<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+<script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places"></script>
 
 <script src="landkreise.js"></script>
-
 <script src="ortschaften.js"></script>
-
 <script src="helperfuns.js"></script>
 
+
 <script>
-
-
-
-
 // Initialize
 
 var mapOptions = {
-
 	zoom: 9,
-
 	center: new google.maps.LatLng(50,10),
-	
 	mapTypeId: google.maps.MapTypeId.HYBRID,
-
 	scaleControl: true
-
 };
 
 
 
 function initialize() {
-	
 	var mapL = new google.maps.Map(document.getElementById('leftMap'),mapOptions);
-	
 	var mapR = new google.maps.Map(document.getElementById('rightMap'),mapOptions);
 
-	
-
 	LKAschaffenburgL.setMap(mapL);
-	
 	LKAschaffenburgR.setMap(mapR);
-	
 	LKBadKissingenL.setMap(mapL);
-	
 	LKBadKissingenR.setMap(mapR);
-	
 	LKHassbergeL.setMap(mapL);
-	
 	LKHassbergeR.setMap(mapR);
-	
 	LKKitzingenL.setMap(mapL);
-	
 	LKKitzingenR.setMap(mapR);
-	
 	LKMainSpessartL.setMap(mapL);
-	
 	LKMainSpessartR.setMap(mapR);
-	
 	LKMiltenbergL.setMap(mapL);
-	
 	LKMiltenbergR.setMap(mapR);
-	
 	LKRhoenGrabfeldL.setMap(mapL);
-	
 	LKRhoenGrabfeldR.setMap(mapR);
-	
 	LKSchweinfurtL.setMap(mapL);
-	
 	LKSchweinfurtR.setMap(mapR);
-	
 	LKWuerzburgL.setMap(mapL);
-	
 	LKWuerzburgR.setMap(mapR);
 
+	// Create the search box and link it to the UI element.
+	var inputL = document.getElementById('targetL');
+	var searchBoxL = new google.maps.places.SearchBox(inputL);
+	var inputR = document.getElementById('targetR');
+	var searchBoxR = new google.maps.places.SearchBox(inputR);
+
+  // Listen for the event fired when the user selects an item from the
+  // pick list. Retrieve the matching places for that item.
+	google.maps.event.addListener(searchBoxL, 'places_changed', function() {
+    	var places = searchBoxL.getPlaces();
+
+	    // For each place, get the icon, place name, and location.
+    	var bounds = new google.maps.LatLngBounds();
+	    for (var i = 0, place; place = places[i]; i++) {
+    		bounds.extend(place.geometry.location);
+	    }
+		mapL.fitBounds(bounds);
+		mapL.setZoom(14);
+  });
+
+	google.maps.event.addListener(searchBoxR, 'places_changed', function() {
+    	var places = searchBoxR.getPlaces();
+
+	    // For each place, get the icon, place name, and location.
+    	var bounds = new google.maps.LatLngBounds();
+	    for (var i = 0, place; place = places[i]; i++) {
+    		bounds.extend(place.geometry.location);
+	    }
+		mapR.fitBounds(bounds);
+		mapR.setZoom(14);
+  });
+
+    // Bias the SearchBox results towards places that are within the bounds of the
+	// current map's viewport.
+	google.maps.event.addListener(mapL, 'bounds_changed', function() {
+		var bounds = mapL.getBounds();
+		searchBoxL.setBounds(bounds);
+	});
+	google.maps.event.addListener(mapR, 'bounds_changed', function() {
+		var bounds = mapR.getBounds();
+		searchBoxR.setBounds(bounds);
+	});
 }
 
-
-
 function centerRightMap(){
-	
 	leftMap = LKAschaffenburgL.getMap();
-	
 	rightMap = LKAschaffenburgR.getMap();
-	
 	rightMap.setCenter(leftMap.getCenter());
-	
 	rightMap.setZoom(leftMap.getZoom());
-
 }
 
 function centerLeftMap(){
-	
 	leftMap = LKAschaffenburgL.getMap();
-	
 	rightMap = LKAschaffenburgR.getMap();
-	
 	leftMap.setCenter(rightMap.getCenter());
-	
 	leftMap.setZoom(rightMap.getZoom());
-
 }
 
-
-
-
 google.maps.event.addDomListener(window, 'load', initialize);
-
 </script>
 
-
-
-
 </head>
-
 <body>
-
 <script type="text/javascript">
 
 function showRadiusValueL(newValue)
-
 {
-		
 	document.getElementById("radiusL").innerHTML=newValue + "m";
-
 }
-
-
 
 function showRadiusValueR(newValue)
 {
-		
 	document.getElementById("radiusR").innerHTML=newValue + "m";
-
 }
-
 </script>
 
-<center> <h1> Abstand zwischen Windrad und Wohngebiet </h1> </center>
+<style>
+	#targetL {
+		width: 245px;
+	}
+	#targetR {
+		width: 245px;
+	}
+</style>
 
-<center> <h3> 
+<center> <h1> Abstand zwischen Windrad und Wohngebiet in Unterfranken </h1> </center>
+
+<center> <h3>
 Wählen Sie den gewünschten Mindestabstand zum nächsten Wohngebiet als Radius mit dem Schieberegler: <br>
 Auf den farbigen Flächen darf kein Windrad stehen! <a href="#zuInfos"> (Informationen)</a> <br>
-Es stehen zwei Karten zur Verfügung, um graphische Vergleiche bequem darstellen zu können.
+<i>Es stehen zwei Karten zur Verfügung, um graphische Vergleiche bequem darstellen zu können.</i>
 </h3></center>
 
 
-<b><font size="4"> Welche Landkreise interessieren Sie:</font></b>  
+<b><font size="4"> Welche Landkreise interessieren Sie:</font></b>
 <i>(Aktivieren Sie möglichst wenige Landkreise gleichzeitig, dann reagiert der Computer schneller.)</i>
 <form action="">
 
@@ -182,13 +173,10 @@ Es stehen zwei Karten zur Verfügung, um graphische Vergleiche bequem darstellen
 <input type="checkbox" id="checkWuerzburg" onclick="changeCircles('Wuerzburg',this.checked)"> Würzburg
 
 </form>
-  
-<table border="0">
-	
-	<tr>
-	
-	<td>
 
+<table border="0">
+	<tr>
+	<td>
 <form>
 
 <button type="button" onclick="setRadius('left',Number(document.getElementById('leftRadius').value))"> Zeichne neuen Abstand </button>
@@ -205,7 +193,7 @@ Transparenz:
 <input name="transparenzL" type="radio" onchange="makeCirclesTransparent('left',0.05)"> wenig
 <input name="transparenzL" type="radio" checked onchange="makeCirclesTransparent('left',0.3)"> mittel
 <input name="transparenzL" type="radio" onchange="makeCirclesTransparent('left',1)"> voll
-<form> 
+<form>
 Markierungen:
 
 <input name="markersL" type="radio" checked onchange="makeMarkersVisible('left','keine')"> Keine
@@ -213,14 +201,8 @@ Markierungen:
 <input name="markersL" type="radio" onchange="makeMarkersVisible('left','einer')"> Einer pro Ortschaft
 
 <input name="markersL" type="radio" onchange="makeMarkersVisible('left','alle')"> Alle
-
-&nbsp &nbsp &nbsp &nbsp &nbsp <button type="button" onclick="centerLeftMap()"> Linke Karte anpassen </button>
-</form> 
+</form>
 </td>
-
-
-
-
 
 <td>
 
@@ -249,9 +231,7 @@ Markierungen:
 
 <input name="markersR" type="radio" onchange="makeMarkersVisible('right','einer')"> Einer pro Ortschaft
 
-<input name="markersR" type="radio" onchange="makeMarkersVisible('right','alle')"> Alle    
-
-&nbsp &nbsp &nbsp &nbsp &nbsp <button type="button" onclick="centerRightMap()"> Rechte Karte anpassen </button>
+<input name="markersR" type="radio" onchange="makeMarkersVisible('right','alle')"> Alle
 </form>
 
 </td>
@@ -260,27 +240,38 @@ Markierungen:
 
 
 <tr>
-	
-	<td> <div id="leftMap" style="height:700px;width:600px"></div> </td>
-	
-	<td> <div id="rightMap" style="height:700px;width:600px" ></div> </td>
-	
+
+	<td>
+	<center>
+	<input id="targetL" type="text" placeholder="In linke Karte nach Ortschaft suchen"> &nbsp &nbsp &nbsp &nbsp &nbsp <button type="button" onclick="centerLeftMap()"> Linke Karte anpassen </button>
+	</center>
+	<div id="leftMap" style="height:700px;width:600px"></div>
+	</td>
+
+	<td>
+	<center>
+	<input id="targetR" type="text" placeholder="In rechter Karte nach Ortschaft suchen"> &nbsp &nbsp &nbsp &nbsp &nbsp <button type="button" onclick="centerRightMap()"> Rechte Karte anpassen </button>
+	</center>
+	<div id="rightMap" style="height:700px;width:600px" ></div> </td>
+
 </tr>
-  
+
 </table>
- 
+
 
 <br />
 <h3>Informationen:</h3>
 <ul>
-	<li> Da Kreise die natürlichen geometrischen Figuren sind, die einen gleichen Abstand vom Mittelpunkt in alle Richtungen darstellen, 
-	werden hier Kreise verwendet um den gewünschten Mindestabstand graphisch zu veranschlaulichen. </li>
+	<li> Da alle Punkte in einem Kreis näher als ein gewisser Mindestabstand vom Mittelpunkt entfernt sind, werden hier Kreise verwendet um den gewünschten Mindestabstand zwischen Windrädern und Wohngebieten graphisch zu veranschaulichen. </li>
 	<li> Die Kreise werden nur um Ortschaften gesetzt, nicht um Einzelhöfe oder Industriegebiete. </li>
-	<li> Die Kreise mit dem gewünschten Mindestabstand werden vor allem an die Ecken der Ortschaften gesetzt. Dadurch endet die farbige 
-	Fläche nicht bei allen Häusern exakt zum gewünschten Abstand. Der Fehler liegt aber meistens nur bei wenigen Metern. </li>
+	<li> Die Kreise mit dem gewünschten Mindestabstand werden vor allem an die Ecken der Ortschaften gesetzt. Dadurch endet die farbige Fläche nicht bei allen Häusern exakt zum gewünschten Abstand. Der Fehler liegt aber meistens nur bei wenigen Metern. </li>
 	<li> Um die Mittelpunkte aller gesetzten Kreise zu erfahren, aktivieren Sie bei Markierungen: Alle. </li>
-	<li> Die Transparenz/Sättigung der Farbe hat keine Bedeutung. Sie dient der Übersicht.</li>
-	<li> 
+	<li> Die Transparenz/Sättigung der Farbe hat keine weitere Bedeutung. Sie dient der Übersicht bei unterschiedlichen Perspektiven.</li>
+	<li> Momentan muss ein gesetzlicher Mindestabstand von 800m von Windrädern zu Wohngebieten eingehalten werden. Falls die sogenannte <i> 10H-Regelung </i> in Kraft tritt, muss der Abstand mindestens die 10-fache Höhe des Windrades betragen. Da in Bayern an vielen Orten die Windräder 200m hoch sein müssen, um wirtschaftlich betrieben werden zu können, müssten diese Windräder mindestens 2000m von Wohngebieten entfernt sein. </li>
+	<li> Die Flächen, die auf dieser Seite für eine Bebauung von Windrädern nicht in Frage kommen, werden nur aufgrund der Abstandregelung zu Wohngebieten ausgeschlossen. Andere Ausschlussgründe wie etwa Wasserschutzgebiete, Naturschutzgebiete oder Täler und Gegenden mit zu wenig Wind usw. werden hier nicht berücksichtigt und nicht als farbige Flächen eingezeichnet. <i>Dies bedeutet, dass die tatsächlich für Windräder zu Verfügung stehenden Flächen geringer sind, als hier dargestellt ist.</i></li>
+	<li> Sollten Sie Probleme habe, diese Seite korrekt
+	darzustellen, aktualisieren Sie bitte Ihren Browser auf <i>Google Chrome 30</i>, <i>Firefox 24</i>, <i> Safari 6</i> bzw. <i>Internet Explorer 11</i>.
+	<li> Bitte wenden Sie sich bei gefundenen Fehlern, Kommentaren und Verbesserungsvorschlägen an <a href="mailto:windradabstand.unterfranken@gmail.com?subject=Kommentar zur Windrad Abstand Seite"> Bernhard Konrad und Isabell Graf</a>.</li>
 </ul>
 </div>
 
