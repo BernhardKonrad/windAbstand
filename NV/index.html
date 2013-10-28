@@ -1,135 +1,294 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
+
 <html>
-  <head>
-    <title>Abstand Windräder</title>
-    <meta name="viewport" content="initial-scale=0.5, user-scalable=no">
-    <meta charset="utf-8">
-    <link href="https://developers.google.com/maps/documentation/javascript/examples/default.css" rel="stylesheet">
+  
+<head>
+    
+<title>Abstand Windräder</title>
+    
+<meta name="viewport" content="initial-scale=0.5, user-scalable=no">
+    
+<meta charset="utf-8">
+    
+<link href="https://developers.google.com/maps/documentation/javascript/examples/default.css" rel="stylesheet">
+
+
 
 <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false"></script>
+
 <script src="landkreise.js"></script>
+
 <script src="ortschaften.js"></script>
+
 <script src="helperfuns.js"></script>
+
 <script>
 
 
+
+
 // Initialize
+
 var mapOptions = {
+
 	zoom: 9,
+
 	center: new google.maps.LatLng(50,10),
-	mapTypeId: google.maps.MapTypeId.HYBRID
+	
+	mapTypeId: google.maps.MapTypeId.HYBRID,
+
+	scaleControl: true
+
 };
 
+
+
 function initialize() {
+	
 	var mapL = new google.maps.Map(document.getElementById('leftMap'),mapOptions);
+	
 	var mapR = new google.maps.Map(document.getElementById('rightMap'),mapOptions);
 
+	
+
 	LKAschaffenburgL.setMap(mapL);
+	
 	LKAschaffenburgR.setMap(mapR);
+	
 	LKBadKissingenL.setMap(mapL);
+	
 	LKBadKissingenR.setMap(mapR);
+	
 	LKHassbergeL.setMap(mapL);
+	
 	LKHassbergeR.setMap(mapR);
+	
 	LKKitzingenL.setMap(mapL);
+	
 	LKKitzingenR.setMap(mapR);
+	
 	LKMainSpessartL.setMap(mapL);
+	
 	LKMainSpessartR.setMap(mapR);
+	
 	LKMiltenbergL.setMap(mapL);
+	
 	LKMiltenbergR.setMap(mapR);
+	
 	LKRhoenGrabfeldL.setMap(mapL);
+	
 	LKRhoenGrabfeldR.setMap(mapR);
+	
 	LKSchweinfurtL.setMap(mapL);
+	
 	LKSchweinfurtR.setMap(mapR);
+	
 	LKWuerzburgL.setMap(mapL);
+	
 	LKWuerzburgR.setMap(mapR);
+
 }
+
+
 
 function centerRightMap(){
+	
 	leftMap = LKAschaffenburgL.getMap();
+	
 	rightMap = LKAschaffenburgR.getMap();
+	
 	rightMap.setCenter(leftMap.getCenter());
+	
 	rightMap.setZoom(leftMap.getZoom());
+
 }
 
+function centerLeftMap(){
+	
+	leftMap = LKAschaffenburgL.getMap();
+	
+	rightMap = LKAschaffenburgR.getMap();
+	
+	leftMap.setCenter(rightMap.getCenter());
+	
+	leftMap.setZoom(rightMap.getZoom());
+
+}
+
+
+
+
 google.maps.event.addDomListener(window, 'load', initialize);
+
 </script>
+
+
 
 
 </head>
+
 <body>
+
 <script type="text/javascript">
+
 function showRadiusValueL(newValue)
+
 {
-		document.getElementById("radiusL").innerHTML=newValue + "m";
+		
+	document.getElementById("radiusL").innerHTML=newValue + "m";
+
 }
+
+
 
 function showRadiusValueR(newValue)
 {
-		document.getElementById("radiusR").innerHTML=newValue + "m";
+		
+	document.getElementById("radiusR").innerHTML=newValue + "m";
+
 }
+
 </script>
 
+<center> <h1> Abstand zwischen Windrad und Wohngebiet </h1> </center>
 
-<center><button type="button" onclick="centerRightMap()"> Rechte Karte anpassen </button></center>
+<center> <h3> 
+Wählen Sie den gewünschten Mindestabstand zum nächsten Wohngebiet als Radius mit dem Schieberegler: <br>
+Auf den farbigen Flächen darf kein Windrad stehen! <a href="#zuInfos"> (Informationen)</a> <br>
+Es stehen zwei Karten zur Verfügung, um graphische Vergleiche bequem darstellen zu können.
+</h3></center>
 
+
+<b><font size="4"> Welche Landkreise interessieren Sie:</font></b>  
+<i>(Aktivieren Sie möglichst wenige Landkreise gleichzeitig, dann reagiert der Computer schneller.)</i>
 <form action="">
+
 <input type="checkbox" id="checkAschaffenburg" onclick="changeCircles('Aschaffenburg',this.checked)"> Aschaffenburg
+
 <input type="checkbox" id="checkBadKissingen" onclick="changeCircles('BadKissingen',this.checked)"> Bad Kissingen
+
 <input type="checkbox" id="checkHassberge" onclick="changeCircles('Hassberge',this.checked)"> Haßberge
+
 <input type="checkbox" id="checkKitzingen" onclick="changeCircles('Kitzingen',this.checked)"> Kitzingen
+
 <input type="checkbox" id="checkMainSpessart" onclick="changeCircles('MainSpessart',this.checked)"> Main Spessart
+
 <input type="checkbox" disabled id="checkMiltenberg" onclick="changeCircles('Miltenberg',this.checked)"> Miltenberg
+
 <input type="checkbox" disabled id="checkRhoenGrabfeld" onclick="changeCircles('RhoenGrabfeld',this.checked)"> Rhön-Grabfeld
+
 <input type="checkbox" id="checkSchweinfurt" onclick="changeCircles('Schweinfurt',this.checked)"> Schweinfurt
+
 <input type="checkbox" id="checkWuerzburg" onclick="changeCircles('Wuerzburg',this.checked)"> Würzburg
+
 </form>
-  <table border="0">
+  
+<table border="0">
+	
 	<tr>
+	
 	<td>
+
 <form>
-<button type="button" onclick="setRadius('left',Number(document.getElementById('leftRadius').value))"> Zeichne neuen Radius </button>
+
+<button type="button" onclick="setRadius('left',Number(document.getElementById('leftRadius').value))"> Zeichne neuen Abstand </button>
+
 <input type="range" name="leftRadius" id="leftRadius" min="500" max="5000" step="100" value="1000" onchange="showRadiusValueL(this.value)">
+
 <span id="radiusL">1000m</span>
+
 </form>
 
 Transparenz:
-<input name="transparenzL" type="radio" onchange="makeCirclesTransparent('left',0)"> 0
-<input name="transparenzL" type="radio" onchange="makeCirclesTransparent('left',0.05)"> 0.05
-<input name="transparenzL" type="radio" checked onchange="makeCirclesTransparent('left',0.3)"> 0.3
-<input name="transparenzL" type="radio" onchange="makeCirclesTransparent('left',1)"> 1
 
-<form>
+<input name="transparenzL" type="radio" onchange="makeCirclesTransparent('left',0)"> leer
+<input name="transparenzL" type="radio" onchange="makeCirclesTransparent('left',0.05)"> wenig
+<input name="transparenzL" type="radio" checked onchange="makeCirclesTransparent('left',0.3)"> mittel
+<input name="transparenzL" type="radio" onchange="makeCirclesTransparent('left',1)"> voll
+<form> 
 Markierungen:
+
 <input name="markersL" type="radio" checked onchange="makeMarkersVisible('left','keine')"> Keine
+
 <input name="markersL" type="radio" onchange="makeMarkersVisible('left','einer')"> Einer pro Ortschaft
+
 <input name="markersL" type="radio" onchange="makeMarkersVisible('left','alle')"> Alle
-</form>
+
+&nbsp &nbsp &nbsp &nbsp &nbsp <button type="button" onclick="centerLeftMap()"> Linke Karte anpassen </button>
+</form> 
 </td>
+
+
+
 
 
 <td>
+
 <form>
-<button type="button" onclick="setRadius('right',Number(document.getElementById('rightRadius').value))"> Zeichne neuen Radius </button>
+
+<button type="button" onclick="setRadius('right',Number(document.getElementById('rightRadius').value))"> Zeichne neuen Abstand </button>
+
 <input type="range" name="rightRadius" id="rightRadius" min="500" max="5000" step="100" value="2000" onchange="showRadiusValueR(this.value)">
+
 <span id="radiusR">2000m</span>
+
 </form>
+
 Transparenz:
-<input name="transparenzR" type="radio" onchange="makeCirclesTransparent('right',0)"> 0
-<input name="transparenzR" type="radio" onchange="makeCirclesTransparent('right',0.05)"> 0.05
-<input name="transparenzR" type="radio" checked onchange="makeCirclesTransparent('right',0.3)"> 0.3
-<input name="transparenzR" type="radio" onchange="makeCirclesTransparent('right',1)"> 1
+
+<input name="transparenzR" type="radio" onchange="makeCirclesTransparent('right',0)"> leer
+
+<input name="transparenzR" type="radio" onchange="makeCirclesTransparent('right',0.05)"> wenig
+<input name="transparenzR" type="radio" checked onchange="makeCirclesTransparent('right',0.3)"> mittel
+<input name="transparenzR" type="radio" onchange="makeCirclesTransparent('right',1)"> voll
 <form>
+
 Markierungen:
+
 <input name="markersR" type="radio" checked onchange="makeMarkersVisible('right','keine')"> Keine
+
 <input name="markersR" type="radio" onchange="makeMarkersVisible('right','einer')"> Einer pro Ortschaft
-<input name="markersR" type="radio" onchange="makeMarkersVisible('right','alle')"> Alle
+
+<input name="markersR" type="radio" onchange="makeMarkersVisible('right','alle')"> Alle    
+
+&nbsp &nbsp &nbsp &nbsp &nbsp <button type="button" onclick="centerRightMap()"> Rechte Karte anpassen </button>
 </form>
+
 </td>
+
 </tr>
+
+
 <tr>
+	
 	<td> <div id="leftMap" style="height:700px;width:600px"></div> </td>
+	
 	<td> <div id="rightMap" style="height:700px;width:600px" ></div> </td>
-	</tr>
-  </table>
- </body>
+	
+</tr>
+  
+</table>
+ 
+
+<br />
+<h3>Informationen:</h3>
+<ul>
+	<li> Da Kreise die natürlichen geometrischen Figuren sind, die einen gleichen Abstand vom Mittelpunkt in alle Richtungen darstellen, 
+	werden hier Kreise verwendet um den gewünschten Mindestabstand graphisch zu veranschlaulichen. </li>
+	<li> Die Kreise werden nur um Ortschaften gesetzt, nicht um Einzelhöfe oder Industriegebiete. </li>
+	<li> Die Kreise mit dem gewünschten Mindestabstand werden vor allem an die Ecken der Ortschaften gesetzt. Dadurch endet die farbige 
+	Fläche nicht bei allen Häusern exakt zum gewünschten Abstand. Der Fehler liegt aber meistens nur bei wenigen Metern. </li>
+	<li> Um die Mittelpunkte aller gesetzten Kreise zu erfahren, aktivieren Sie bei Markierungen: Alle. </li>
+	<li> Die Transparenz/Sättigung der Farbe hat keine Bedeutung. Sie dient der Übersicht.</li>
+	<li> 
+</ul>
+</div>
+
+<br>
+<br>
+<br>
+<br>
+<a name="zuInfos"></a>
+</body>
+
 </html>
