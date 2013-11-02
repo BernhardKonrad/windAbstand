@@ -16,6 +16,9 @@
 
 <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places"></script>
 
+<script type="text/javascript" src="labels.js"></script>
+<script type="text/javascript" src="ruler.js"></script>
+
 <script src="landkreise.js"></script>
 <script src="ortschaften.js"></script>
 <script src="helperfuns.js"></script>
@@ -32,10 +35,11 @@ var mapOptions = {
 };
 
 
-
+var mapL
+var mapR
 function initialize() {
-	var mapL = new google.maps.Map(document.getElementById('leftMap'),mapOptions);
-	var mapR = new google.maps.Map(document.getElementById('rightMap'),mapOptions);
+	mapL = new google.maps.Map(document.getElementById('leftMap'),mapOptions);
+	mapR = new google.maps.Map(document.getElementById('rightMap'),mapOptions);
 
 	LKAschaffenburgL.setMap(mapL);
 	LKAschaffenburgR.setMap(mapR);
@@ -244,6 +248,7 @@ Markierungen:
 	<td>
 	<center>
 	<input id="targetL" type="text" placeholder="In linke Karte nach Ortschaft suchen"> &nbsp &nbsp &nbsp &nbsp &nbsp <button type="button" onclick="centerLeftMap()"> Linke Karte anpassen </button>
+	<input type='button' id='addruler' onclick='addruler(mapL);' value='Lineal'/>
 	</center>
 	<div id="leftMap" style="height:700px;width:600px"></div>
 	</td>
@@ -251,6 +256,7 @@ Markierungen:
 	<td>
 	<center>
 	<input id="targetR" type="text" placeholder="In rechter Karte nach Ortschaft suchen"> &nbsp &nbsp &nbsp &nbsp &nbsp <button type="button" onclick="centerRightMap()"> Rechte Karte anpassen </button>
+	<input type='button' id='addruler' onclick='addruler(mapR);' value='Lineal'/>
 	</center>
 	<div id="rightMap" style="height:700px;width:600px" ></div> </td>
 
@@ -267,6 +273,7 @@ Markierungen:
 	<li> Die Kreise mit dem gewünschten Mindestabstand werden vor allem an die Ecken der Ortschaften gesetzt. Dadurch endet die farbige Fläche nicht bei allen Häusern exakt zum gewünschten Abstand. Der Fehler liegt aber meistens nur bei wenigen Metern. </li>
 	<li> Um die Mittelpunkte aller gesetzten Kreise zu erfahren, aktivieren Sie bei Markierungen: Alle. </li>
 	<li> Die Transparenz/Sättigung der Farbe hat keine weitere Bedeutung. Sie dient der Übersicht bei unterschiedlichen Perspektiven.</li>
+	<li> Mit dem Lineal können zusätzlich einzelne Abstände gemessen werden. Um ein Lineal zu entfernen, einfach einen der entsprechenden Enden doppelklicken. </li>
 	<li> Momentan muss ein gesetzlicher Mindestabstand von 800m von Windrädern zu Wohngebieten eingehalten werden. Falls die sogenannte <i> 10H-Regelung </i> in Kraft tritt, muss der Abstand mindestens die 10-fache Höhe des Windrades betragen. Da in Bayern an vielen Orten die Windräder 200m hoch sein müssen, um wirtschaftlich betrieben werden zu können, müssten diese Windräder mindestens 2000m von Wohngebieten entfernt sein. </li>
 	<li> Die Flächen, die auf dieser Seite für eine Bebauung von Windrädern nicht in Frage kommen, werden nur aufgrund der Abstandregelung zu Wohngebieten ausgeschlossen. Andere Ausschlussgründe wie etwa Wasserschutzgebiete, Naturschutzgebiete oder Täler und Gegenden mit zu wenig Wind usw. werden hier nicht berücksichtigt und nicht als farbige Flächen eingezeichnet. <i>Dies bedeutet, dass die tatsächlich für Windräder zu Verfügung stehenden Flächen geringer sind, als hier dargestellt ist.</i></li>
 	<li> Sollten Sie Probleme habe, diese Seite korrekt
