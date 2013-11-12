@@ -14,7 +14,7 @@ python ortschaftenNV.py ../Ortschaften/BadKissingen.txt ed6703
 python ortschaftenNV.py ../Ortschaften/Hassberge.txt ed0e0e
 python ortschaftenNV.py ../Ortschaften/Kitzingen.txt ff97ff
 python ortschaftenNV.py ../Ortschaften/MainSpessart.txt cf0eed
-python ortschaftenNV.py ../Ortschaften/Miltenberg.txt 5da559
+python ortschaftenNV.py ../Ortschaften/Miltenberg.txt ffffff
 python ortschaftenNV.py ../Ortschaften/RhoenGrabfeld.txt 0eedc4
 python ortschaftenNV.py ../Ortschaften/Schweinfurt.txt 0e97ed
 python ortschaftenNV.py ../Ortschaften/Wuerzburg.txt 077f2b
@@ -25,7 +25,7 @@ python einMarkerNV.py ../Ortschaften/BadKissingen.txt ed6703
 python einMarkerNV.py ../Ortschaften/Hassberge.txt ed0e0e
 python einMarkerNV.py ../Ortschaften/Kitzingen.txt ff97ff
 python einMarkerNV.py ../Ortschaften/MainSpessart.txt cf0eed
-python einMarkerNV.py ../Ortschaften/Miltenberg.txt 5da559
+python einMarkerNV.py ../Ortschaften/Miltenberg.txt ffffff
 python einMarkerNV.py ../Ortschaften/RhoenGrabfeld.txt 0eedc4
 python einMarkerNV.py ../Ortschaften/Schweinfurt.txt 0e97ed
 python einMarkerNV.py ../Ortschaften/Wuerzburg.txt 077f2b
