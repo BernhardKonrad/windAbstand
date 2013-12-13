@@ -60,7 +60,8 @@ function getCircles(Ortschaften,rad){
 			radius: rad,
 			fillColor: Ortschaften[i][3],
 			strokeWeight: 0,
-			fillOpacity: 0.3
+			fillOpacity: 0.1,
+			zIndex: -100
 		});
 		circles.push(circle);
 	}
