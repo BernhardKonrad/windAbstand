@@ -21,17 +21,42 @@
 
 <script src="landkreise.js"></script>
 <script src="ortschaften.js"></script>
+<script src="standorte.js"></script>
 <script src="helperfuns.js"></script>
 
 
 <script>
 // Initialize
 
+var styleArray = [
+  {
+    featureType: "all",
+    stylers: [
+      { saturation: -80 }
+    ]
+  },{
+    featureType: "road",
+    elementType: "geometry",
+    stylers: [
+      { hue: "044eb0" },
+      { saturation: 100 },
+	  { lightness: 100 },
+      { visibility: "on" }
+    ]
+  },{
+    featureType: "poi.business",
+    elementType: "labels",
+    stylers: [
+      { visibility: "off" }
+    ]
+  }
+];
+
 var mapOptions = {
 	zoom: 9,
 	center: new google.maps.LatLng(50,10),
 	mapTypeId: google.maps.MapTypeId.HYBRID,
-	scaleControl: true
+	scaleControl: true,
 };
 
 
@@ -40,7 +65,14 @@ var mapR
 function initialize() {
 	mapL = new google.maps.Map(document.getElementById('leftMap'),mapOptions);
 	mapR = new google.maps.Map(document.getElementById('rightMap'),mapOptions);
+	mapL.setOptions({styles: styleArray});
 
+	for (var i=0, length=markersStandorteL.length; i<length; i++){
+		markersStandorteL[i].setMap(mapL);
+	}
+	for (var i=0, length=markersStandorteR.length; i<length; i++){
+		markersStandorteR[i].setMap(mapR);
+	}
 	LKAschaffenburgL.setMap(mapL);
 	LKAschaffenburgR.setMap(mapR);
 	LKBadKissingenL.setMap(mapL);

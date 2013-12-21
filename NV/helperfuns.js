@@ -51,6 +51,28 @@ function getMarkers(Ortschaften){
 	return(markers)
 }
 
+var windradIcon = new google.maps.MarkerImage(
+    'http://ec.l.thumbs.canstockphoto.com/canstock16647054.jpg',
+    null, /* size is determined at runtime */
+    null, /* origin is 0,0 */
+    null, /* anchor is bottom center of the scaled image */
+    new google.maps.Size(25, 25)
+);
+
+function getMarkersStandorte(Standorte){
+	var markers = []
+	for (var i=0, length=Standorte.length; i < length; i++){
+		var marker = new google.maps.Marker({
+			position: new google.maps.LatLng(Standorte[i][1],Standorte[i][2]),
+			map: null,
+			icon: windradIcon,
+			title: Standorte[i][0] + '\n' + Standorte[i][1] + '\n' + Standorte[i][2]
+		});
+		markers.push(marker);
+		}
+	return(markers)
+}
+
 function getCircles(Ortschaften,rad){
 	var circles = []
 	for (var i=0, length=Ortschaften.length; i < length; i++){
@@ -91,6 +113,9 @@ var LKSchweinfurtR = getPolygon(LKSchweinfurt)
 var LKWuerzburgL = getPolygon(LKWuerzburg)
 var LKWuerzburgR = getPolygon(LKWuerzburg)
 
+// Standorte
+var markersStandorteL = getMarkersStandorte(Standorte)
+var markersStandorteR = getMarkersStandorte(Standorte)
 
 // Ein-pro-Ortschaft Marker
 var markersAschaffenburgEinL = getMarkers(OrtschaftenAschaffenburgEin)
