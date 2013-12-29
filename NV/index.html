@@ -38,9 +38,9 @@ var styleArray = [
     featureType: "road",
     elementType: "geometry",
     stylers: [
-      { hue: "044eb0" },
-      { saturation: 100 },
-	  { lightness: 100 },
+      { hue: "044eb0" }, <!-- 044eb0 -->
+      { saturation: 50 },
+	  { lightness: 50 },
       { visibility: "on" }
     ]
   },{
@@ -70,6 +70,7 @@ function initialize() {
 	for (var i=0, length=markersStandorteL.length; i<length; i++){
 		markersStandorteL[i].setMap(mapL);
 	}
+
 	for (var i=0, length=markersStandorteR.length; i<length; i++){
 		markersStandorteR[i].setMap(mapR);
 	}

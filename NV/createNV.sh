@@ -63,6 +63,7 @@ cat RhoenGrabfeld-ein.txt >> ortschaften.js
 cat Schweinfurt-ein.txt >> ortschaften.js
 cat Wuerzburg-ein.txt >> ortschaften.js
 
+python standorte.py
 # sed -i 's/\ä/\&auml\;/g;s/\Ä/\&Auml\;/g;s/\ö/\&ouml\;/g;s/\Ö/\&Ouml\;/g;s/\ü/\&uuml\;/g;s/\Ü/\&Uuml\;/g;s/\ß/\&szlig\;/g' NV.html
 # cat NV.html | sed 's/\\FC/\&uuml\;/g;' > NV1.html
 

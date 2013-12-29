@@ -52,21 +52,22 @@ function getMarkers(Ortschaften){
 }
 
 var windradIcon = new google.maps.MarkerImage(
-    'http://ec.l.thumbs.canstockphoto.com/canstock16647054.jpg',
+   'http://www.sfu.ca/~imgraf/windabstandbilder/windrad5.png', 
     null, /* size is determined at runtime */
     null, /* origin is 0,0 */
     null, /* anchor is bottom center of the scaled image */
     new google.maps.Size(25, 25)
 );
 
+
 function getMarkersStandorte(Standorte){
 	var markers = []
 	for (var i=0, length=Standorte.length; i < length; i++){
 		var marker = new google.maps.Marker({
-			position: new google.maps.LatLng(Standorte[i][1],Standorte[i][2]),
+			position: new google.maps.LatLng(Standorte[i][0],Standorte[i][1]),
 			map: null,
 			icon: windradIcon,
-			title: Standorte[i][0] + '\n' + Standorte[i][1] + '\n' + Standorte[i][2]
+			title: 'x' + '\n' + Standorte[i][0] + '\n' + Standorte[i][1]
 		});
 		markers.push(marker);
 		}
