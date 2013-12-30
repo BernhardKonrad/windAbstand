@@ -52,7 +52,7 @@ function getMarkers(Ortschaften){
 }
 
 var windradIcon = new google.maps.MarkerImage(
-   'http://www.sfu.ca/~imgraf/windabstandbilder/windrad5.png', 
+   'http://www.sfu.ca/~imgraf/windabstandbilder/windrad5.png',
     null, /* size is determined at runtime */
     null, /* origin is 0,0 */
     null, /* anchor is bottom center of the scaled image */
@@ -67,7 +67,7 @@ function getMarkersStandorte(Standorte){
 			position: new google.maps.LatLng(Standorte[i][0],Standorte[i][1]),
 			map: null,
 			icon: windradIcon,
-			title: 'x' + '\n' + Standorte[i][0] + '\n' + Standorte[i][1]
+			title: Standorte[i][0] + '\n' + Standorte[i][1]
 		});
 		markers.push(marker);
 		}
@@ -83,7 +83,7 @@ function getCircles(Ortschaften,rad){
 			radius: rad,
 			fillColor: Ortschaften[i][3],
 			strokeWeight: 0,
-			fillOpacity: 0.3,
+			fillOpacity: 1,
 			zIndex: -100
 		});
 		circles.push(circle);

@@ -66,6 +66,7 @@ function initialize() {
 	mapL = new google.maps.Map(document.getElementById('leftMap'),mapOptions);
 	mapR = new google.maps.Map(document.getElementById('rightMap'),mapOptions);
 	mapL.setOptions({styles: styleArray});
+	mapR.setOptions({styles: styleArray});
 
 	for (var i=0, length=markersStandorteL.length; i<length; i++){
 		markersStandorteL[i].setMap(mapL);
@@ -220,8 +221,8 @@ Transparenz:
 
 <input name="transparenzL" type="radio" onchange="makeCirclesTransparent('left',0)"> leer
 <input name="transparenzL" type="radio" onchange="makeCirclesTransparent('left',0.05)"> wenig
-<input name="transparenzL" type="radio" checked onchange="makeCirclesTransparent('left',0.3)"> mittel
-<input name="transparenzL" type="radio" onchange="makeCirclesTransparent('left',1)"> voll
+<input name="transparenzL" type="radio" onchange="makeCirclesTransparent('left',0.3)"> mittel
+<input name="transparenzL" type="radio" checked onchange="makeCirclesTransparent('left',1)"> voll
 <form>
 Markierungen:
 
@@ -247,8 +248,8 @@ Transparenz:
 
 <input name="transparenzR" type="radio" onchange="makeCirclesTransparent('right',0)"> leer
 <input name="transparenzR" type="radio" onchange="makeCirclesTransparent('right',0.05)"> wenig
-<input name="transparenzR" type="radio" checked onchange="makeCirclesTransparent('right',0.3)"> mittel
-<input name="transparenzR" type="radio" onchange="makeCirclesTransparent('right',1)"> voll
+<input name="transparenzR" type="radio" onchange="makeCirclesTransparent('right',0.3)"> mittel
+<input name="transparenzR" type="radio" checked onchange="makeCirclesTransparent('right',1)"> voll
 <form>
 
 Markierungen:
