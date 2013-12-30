@@ -52,7 +52,7 @@ function getMarkers(Ortschaften){
 }
 
 var windradIcon = new google.maps.MarkerImage(
-   'http://www.sfu.ca/~imgraf/windabstandbilder/windrad5.png',
+   'http://www.sfu.ca/~imgraf/windabstandbilder/windrad1.png',
     null, /* size is determined at runtime */
     null, /* origin is 0,0 */
     null, /* anchor is bottom center of the scaled image */
