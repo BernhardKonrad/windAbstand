@@ -3,7 +3,7 @@ windAbstand
 
 Mindestabstand von Siedlungen in Unterfranken zu Windrädern
 
-[Dynamische Landkarte](http://www.bwjh.de/dynamische-landkarte.html)
+[Dynamische Landkarte](http://windabstand.appspot.com/)
 
 Momentan wird ein vom Bayerischen Landesamt für Umwelt vorgeschlagener Mindestabstand von 800m von Windrädern zu Wohngebieten eingehalten. Falls die sogenannte 10H-Idee in Kraft treten sollte, müsste der Abstand mindestens die 10-fache Höhe des Windrades betragen. Da in Bayern an vielen Orten die Windräder 200m hoch sein müssen, um wirtschaftlich betrieben werden zu können, müssten diese Windräder mindestens 2000m von Wohngebieten entfernt sein. 
 
