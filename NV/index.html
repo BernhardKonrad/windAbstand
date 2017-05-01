@@ -67,7 +67,7 @@ function initialize() {
 	mapR = new google.maps.Map(document.getElementById('rightMap'),mapOptions);
 	mapL.setOptions({styles: styleArray});
 	mapR.setOptions({styles: styleArray});
-
+ 
 	for (var i=0, length=markersStandorteL.length; i<length; i++){
 		markersStandorteL[i].setMap(mapL);
 	}
@@ -75,6 +75,7 @@ function initialize() {
 	for (var i=0, length=markersStandorteR.length; i<length; i++){
 		markersStandorteR[i].setMap(mapR);
 	}
+	
 	LKAschaffenburgL.setMap(mapL);
 	LKAschaffenburgR.setMap(mapR);
 	LKBadKissingenL.setMap(mapL);
@@ -201,6 +202,7 @@ Auf den farbigen Flächen darf kein Windrad stehen! <a href="#zuInfos"> (Informa
 <input type="checkbox" id="checkRhoenGrabfeld" onclick="changeCircles('RhoenGrabfeld',this.checked)"> Rhön-Grabfeld
 <input type="checkbox" id="checkSchweinfurt" onclick="changeCircles('Schweinfurt',this.checked)"> Schweinfurt
 <input type="checkbox" id="checkWuerzburg" onclick="changeCircles('Wuerzburg',this.checked)"> Würzburg
+<input type="checkbox" id="checkRest" onclick="changeCircles('Rest',this.checked)"> Rest
 
 </form>
 

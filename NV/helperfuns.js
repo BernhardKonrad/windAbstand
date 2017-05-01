@@ -137,6 +137,8 @@ var markersSchweinfurtEinL = getMarkers(OrtschaftenSchweinfurtEin)
 var markersSchweinfurtEinR = getMarkers(OrtschaftenSchweinfurtEin)
 var markersWuerzburgEinL = getMarkers(OrtschaftenWuerzburgEin)
 var markersWuerzburgEinR = getMarkers(OrtschaftenWuerzburgEin)
+var markersRestEinL = getMarkers(OrtschaftenRestEin)
+var markersRestEinR = getMarkers(OrtschaftenRestEin)
 
 
 // Alle Marker
@@ -158,6 +160,8 @@ var markersSchweinfurtL = getMarkers(OrtschaftenSchweinfurt)
 var markersSchweinfurtR = getMarkers(OrtschaftenSchweinfurt)
 var markersWuerzburgL = getMarkers(OrtschaftenWuerzburg)
 var markersWuerzburgR = getMarkers(OrtschaftenWuerzburg)
+var markersRestL = getMarkers(OrtschaftenRest)
+var markersRestR = getMarkers(OrtschaftenRest)
 
 
 // Kreise
@@ -179,6 +183,9 @@ var circlesSchweinfurtL = getCircles(OrtschaftenSchweinfurt,1000)
 var circlesSchweinfurtR = getCircles(OrtschaftenSchweinfurt,2000)
 var circlesWuerzburgL = getCircles(OrtschaftenWuerzburg,1000)
 var circlesWuerzburgR = getCircles(OrtschaftenWuerzburg,2000)
+var circlesRestL = getCircles(OrtschaftenRest,1000)
+var circlesRestR = getCircles(OrtschaftenRest,2000)
+
 
 //
 
@@ -224,6 +231,9 @@ function setRadius(whichMap,radius) {
 		for (var i=0, length=circlesWuerzburgL.length; i<length; i++){
 			circlesWuerzburgL[i].setRadius(radius);
 		}
+		for (var i=0, length=circlesRestL.length; i<length; i++){
+			circlesRestL[i].setRadius(radius);
+		}
 	}
 	else {
 		for (var i=0, length=circlesAschaffenburgR.length; i<length; i++){
@@ -252,6 +262,9 @@ function setRadius(whichMap,radius) {
 		}
 		for (var i=0, length=circlesWuerzburgR.length; i<length; i++){
 			circlesWuerzburgR[i].setRadius(radius);
+		}
+		for (var i=0, length=circlesRestR.length; i<length; i++){
+			circlesRestR[i].setRadius(radius);
 		}
 	}
 }
@@ -294,6 +307,9 @@ function makeCirclesTransparent(whichMap,alpha) {
 		for (var i=0, length=circlesWuerzburgL.length; i<length; i++){
 			circlesWuerzburgL[i].setOptions({'fillOpacity': alpha, 'strokeWeight': strokeWeight});
 		}
+		for (var i=0, length=circlesRestL.length; i<length; i++){
+			circlesRestL[i].setOptions({'fillOpacity': alpha, 'strokeWeight': strokeWeight});
+		}
 	}
 	else {
 		for (var i=0, length=circlesAschaffenburgR.length; i<length; i++){
@@ -322,6 +338,9 @@ function makeCirclesTransparent(whichMap,alpha) {
 		}
 		for (var i=0, length=circlesWuerzburgR.length; i<length; i++){
 			circlesWuerzburgR[i].setOptions({'fillOpacity': alpha, 'strokeWeight': strokeWeight});
+		}
+		for (var i=0, length=circlesRestR.length; i<length; i++){
+			circlesRestR[i].setOptions({'fillOpacity': alpha, 'strokeWeight': strokeWeight});
 		}
 	}
 }
@@ -402,6 +421,14 @@ function changeCircles(whichLandkreisString,makeVisible){
 			markersLandkreisEinR = markersWuerzburgEinR;
 			markersLandkreisL = markersWuerzburgL;
 			markersLandkreisR = markersWuerzburgR;
+			break;
+		case "Rest":
+			circlesLandkreisL = circlesRestL;
+			circlesLandkreisR = circlesRestR;
+			markersLandkreisEinL = markersRestEinL;
+			markersLandkreisEinR = markersRestEinR;
+			markersLandkreisL = markersRestL;
+			markersLandkreisR = markersRestR;
 			break;
 	}
 	if (makeVisible) {
@@ -542,6 +569,14 @@ function makeMarkersVisible(whichMap,whichMarkers) {
 				markersWuerzburgEinL[i].setMap(einerMap);
 			}
 		}
+		if (isActive('checkRest')){
+			for (var i=0, length=markersRestL.length; i<length; i++){
+				markersRestL[i].setMap(alleMap);
+			}
+			for (var i=0, length=markersRestEinL.length; i<length; i++){
+				markersRestEinL[i].setMap(einerMap);
+			}
+		}
 	}
 	else if (whichMap == "right") {
 		if (isActive('checkAschaffenburg')){
@@ -614,6 +649,14 @@ function makeMarkersVisible(whichMap,whichMarkers) {
 			}
 			for (var i=0, length=markersWuerzburgEinR.length; i<length; i++){
 				markersWuerzburgEinR[i].setMap(einerMap);
+			}
+		}
+		if (isActive('checkRest')){
+			for (var i=0, length=markersRestR.length; i<length; i++){
+				markersRestR[i].setMap(alleMap);
+			}
+			for (var i=0, length=markersRestEinR.length; i<length; i++){
+				markersRestEinR[i].setMap(einerMap);
 			}
 		}
 	}

@@ -9,15 +9,16 @@ python translate_polygonNV.py ../Landkreise/schweinfurt-land-raw.txt
 python translate_polygonNV.py ../Landkreise/wue-land-raw.txt
 
 
-python ortschaftenNV.py ../Ortschaften/Aschaffenburg.txt ffa900
-python ortschaftenNV.py ../Ortschaften/BadKissingen.txt ed6703
-python ortschaftenNV.py ../Ortschaften/Hassberge.txt 5cadff
+python ortschaftenNV.py ../Ortschaften/Aschaffenburg.txt ff97ff
+python ortschaftenNV.py ../Ortschaften/BadKissingen.txt ff97ff
+python ortschaftenNV.py ../Ortschaften/Hassberge.txt ff97ff
 python ortschaftenNV.py ../Ortschaften/Kitzingen.txt ff97ff
-python ortschaftenNV.py ../Ortschaften/MainSpessart.txt cf0eed
-python ortschaftenNV.py ../Ortschaften/Miltenberg.txt ffffff
-python ortschaftenNV.py ../Ortschaften/RhoenGrabfeld.txt 0eedc4
-python ortschaftenNV.py ../Ortschaften/Schweinfurt.txt 3333d6
-python ortschaftenNV.py ../Ortschaften/Wuerzburg.txt 00cc00
+python ortschaftenNV.py ../Ortschaften/MainSpessart.txt ff97ff
+python ortschaftenNV.py ../Ortschaften/Miltenberg.txt ff97ff
+python ortschaftenNV.py ../Ortschaften/RhoenGrabfeld.txt ff97ff
+python ortschaftenNV.py ../Ortschaften/Schweinfurt.txt ff97ff
+python ortschaftenNV.py ../Ortschaften/Wuerzburg.txt ff97ff
+python ortschaftenNV.py ../Ortschaften/Rest.txt ff97ff
 
 
 python einMarkerNV.py ../Ortschaften/Aschaffenburg.txt ffa900
@@ -29,6 +30,7 @@ python einMarkerNV.py ../Ortschaften/Miltenberg.txt ffffff
 python einMarkerNV.py ../Ortschaften/RhoenGrabfeld.txt 0eedc4
 python einMarkerNV.py ../Ortschaften/Schweinfurt.txt 3333d6
 python einMarkerNV.py ../Ortschaften/Wuerzburg.txt 00cc00
+python einMarkerNV.py ../Ortschaften/Rest.txt 00cccc
 
 
 cat aschaffenburg-LK.txt > landkreise.js
@@ -51,6 +53,7 @@ cat Miltenberg-Ort.txt >> ortschaften.js
 cat RhoenGrabfeld-Ort.txt >> ortschaften.js
 cat Schweinfurt-Ort.txt >> ortschaften.js
 cat Wuerzburg-Ort.txt >> ortschaften.js
+cat Rest-Ort.txt >> ortschaften.js
 
 
 cat Aschaffenburg-ein.txt >> ortschaften.js
@@ -62,10 +65,11 @@ cat Miltenberg-ein.txt >> ortschaften.js
 cat RhoenGrabfeld-ein.txt >> ortschaften.js
 cat Schweinfurt-ein.txt >> ortschaften.js
 cat Wuerzburg-ein.txt >> ortschaften.js
+cat Rest-ein.txt >> ortschaften.js
 
 python standorte.py
 # sed -i 's/\ä/\&auml\;/g;s/\Ä/\&Auml\;/g;s/\ö/\&ouml\;/g;s/\Ö/\&Ouml\;/g;s/\ü/\&uuml\;/g;s/\Ü/\&Uuml\;/g;s/\ß/\&szlig\;/g' NV.html
 # cat NV.html | sed 's/\\FC/\&uuml\;/g;' > NV1.html
 
 rm *.txt
-
+rm *temp*
