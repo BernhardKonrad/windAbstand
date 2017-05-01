@@ -16,8 +16,8 @@
 
 <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=false&libraries=places"></script>
 
-<script type="text/javascript" src="labels.js"></script>
-<script type="text/javascript" src="ruler.js"></script>
+<script src={{ url_for('static', filename='labels.js') }} ></script>
+<script src={{ url_for('static', filename='ruler.js') }} ></script>
 
 <script src={{ url_for('static', filename='landkreise.js') }} ></script>
 <script src={{ url_for('static', filename='ortschaften.js') }} ></script>
